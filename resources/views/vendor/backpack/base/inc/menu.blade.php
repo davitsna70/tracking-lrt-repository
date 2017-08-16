@@ -186,13 +186,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             @if(\Illuminate\Support\Facades\Auth::user()->profile != null)
                                 @if(Auth::user()->profile->foto_profil!=null)
-                                    <img src="{{ url("/storage/profile/".basename(\Illuminate\Support\Facades\Auth::user()->profile->foto_profil)) }}"
+                                    <img src="{{ url("/profile/photo/".basename(\Illuminate\Support\Facades\Auth::user()->profile->foto_profil)) }}"
                                          class="user-image" alt="User Image">
                                 @else
-                                    <img src="{{ url("/storage/profile/na.png")}}" class="user-image" alt="N/A">
+                                    <img src="{{ url("/profile/photo/na.png")}}" class="user-image" alt="N/A">
                                 @endif
                             @else
-                                <img src="{{ url("/storage/profile/na.png")}}" class="user-image" alt="N/A">
+                                <img src="{{ url("/profile/photo/na.png")}}" class="user-image" alt="N/A">
                             @endif
                             <span class="hidden-xs">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
                         </a>
@@ -201,13 +201,13 @@
                             <li class="user-header">
                                 @if(\Illuminate\Support\Facades\Auth::user()->profile != null)
                                     @if(Auth::user()->profile->foto_profil!=null)
-                                        <img src="{{ url("/storage/profile/".basename(\Illuminate\Support\Facades\Auth::user()->profile->foto_profil)) }}"
+                                        <img src="{{ url("/profile/photo/".basename(\Illuminate\Support\Facades\Auth::user()->profile->foto_profil)) }}"
                                              class="img-circle" alt="User Image">
                                     @else
-                                        <img src="{{ url("/storage/profile/na.png")}}" class="img-circle" alt="N/A">
+                                        <img src="{{ url("/profile/photo/na.png")}}" class="img-circle" alt="N/A">
                                     @endif
                                 @else
-                                    <img src="{{ url("/storage/profile/na.png")}}" class="img-circle" alt="N/A">
+                                    <img src="{{ url("/profile/photo/na.png")}}" class="img-circle" alt="N/A">
                                 @endif
 
                                 <p>
