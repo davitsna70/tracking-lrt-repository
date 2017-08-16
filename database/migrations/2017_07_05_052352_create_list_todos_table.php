@@ -16,7 +16,7 @@ class CreateListTodosTable extends Migration
         Schema::create('list_to_dos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('judul');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('activity_id')->unsigned();
             $table->foreign('activity_id')->references('id')->on('activities');

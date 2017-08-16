@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\UserActivity;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;use App\LogActivity;
 
 class UserActivityController extends Controller
 {
@@ -14,9 +15,12 @@ class UserActivityController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        dd($user['admin']);
-        return view('home');
+        Auth::user()->hasRole(['super_admin']);
+
+        $userActivities = UserActivity::paginate(10);
+
+        return view('data.user_activity.index')
+            ->with('user_activities', $userActivities);
     }
 
     /**
@@ -26,7 +30,9 @@ class UserActivityController extends Controller
      */
     public function create()
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        return view('data.user_activity.create');
     }
 
     /**
@@ -37,7 +43,16 @@ class UserActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $user_activity = new UserActivity();
+        $user_activity->user_id = $request->user_id;
+        $user_activity->activity_id = $request->activity_id;
+        $user_activity->save();
+
+        (new LogActivity())->saveLog('telah membuat userActivity baru');
+
+        return redirect('/data/user_activity/');
     }
 
     /**
@@ -48,7 +63,12 @@ class UserActivityController extends Controller
      */
     public function show($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $user_activity = UserActivity::find($id);
+
+        return view('data.user_activity.show')
+            ->with('user_activity', $user_activity);
     }
 
     /**
@@ -59,7 +79,12 @@ class UserActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $user_activity = UserActivity::find($id);
+
+        return view('data.user_activity.edit')
+            ->with('user_activity', $user_activity);
     }
 
     /**
@@ -71,7 +96,14 @@ class UserActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $user_activity = UserActivity::find($id);
+        $user_activity->user_id = $request->user_id;
+        $user_activity->activity_id = $request->activity_id;
+        $user_activity->save();
+        (new LogActivity())->saveLog('telah melakukan update userActivity '.$id);
+        return redirect('/data/user_activity/'.$id.'/show');
     }
 
     /**
@@ -82,6 +114,12 @@ class UserActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        UserActivity::destroy($id);
+
+        (new LogActivity())->saveLog('telah menghapus userActivity '.$id);
+
+        return redirect('/data/user_activity/');
     }
 }

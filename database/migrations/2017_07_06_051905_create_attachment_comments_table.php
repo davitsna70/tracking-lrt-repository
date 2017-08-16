@@ -18,6 +18,7 @@ class CreateAttachmentCommentsTable extends Migration
             $table->integer('comment_id')->unsigned();
             $table->foreign('comment_id')->references('id')->on('comments');
             $table->string('lampiran');
+            $table->string('nama_asli_lampiran');
             $table->dateTime('waktu_pembuatan');
         });
     }

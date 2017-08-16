@@ -18,6 +18,7 @@ class CreateAttachmentActivitiesTable extends Migration
             $table->integer('activity_id')->unsigned();
             $table->foreign('activity_id')->references('id')->on('activities');
             $table->string('lampiran');
+            $table->string('nama_asli_lampiran');
             $table->dateTime('waktu_pembuatan');
         });
     }

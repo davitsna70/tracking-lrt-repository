@@ -1529,7 +1529,7 @@ Class.extend = function(members) {
 	// build the base prototype for the subclass, which is an new object chained to the superclass's prototype
 	subClass.prototype = createObject(superClass.prototype);
 
-	// copy each member variable/method onto the the subclass's prototype
+	// copy each member_group variable/method onto the the subclass's prototype
 	copyOwnProps(members, subClass.prototype);
 
 	// copy over all class variables/methods to the subclass, such as `extend` and `mixin`
@@ -1538,7 +1538,7 @@ Class.extend = function(members) {
 	return subClass;
 };
 
-// adds new member variables/methods to the class's prototype.
+// adds new member_group variables/methods to the class's prototype.
 // can be called with another class, or a plain object hash containing new members.
 Class.mixin = function(members) {
 	copyOwnProps(members.prototype || members, this.prototype);
@@ -6153,7 +6153,7 @@ var View = fc.View = Class.extend({
 	},
 
 
-	// A good place for subclasses to initialize member variables
+	// A good place for subclasses to initialize member_group variables
 	initialize: function() {
 		// subclasses can implement
 	},

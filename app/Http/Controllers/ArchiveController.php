@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Archive;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;use App\LogActivity;
 
 class ArchiveController extends Controller
 {
@@ -13,7 +15,15 @@ class ArchiveController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $archives = Archive::paginate(10);
+
+        return view('data.archive.index')
+            ->with('archives', $archives);
     }
 
     /**
@@ -23,7 +33,12 @@ class ArchiveController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        return view('data.archive.create');
     }
 
     /**
@@ -34,7 +49,20 @@ class ArchiveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $archive = new Archive();
+        $archive->user_id = $request->user_id;
+        $archive->activity_id = $request->activity_id;
+        $archive->waktu_pembuatan = date("Y-m-d h:i:s");
+        $archive->save();
+
+        (new LogActivity())->saveLog('telah membuat archive baru');
+
+        return redirect('/data/archive/');
     }
 
     /**
@@ -45,7 +73,15 @@ class ArchiveController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $archive = Archive::find($id);
+
+        return view('data.archive.show')
+            ->with('archive',$archive);
     }
 
     /**
@@ -56,7 +92,15 @@ class ArchiveController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $archive = Archive::find($id);
+
+        return view('data.archive.edit')
+            ->with('archive',$archive);
     }
 
     /**
@@ -68,7 +112,19 @@ class ArchiveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $archive = Archive::find($id);
+        $archive->user_id = $request->user_id;
+        $archive->activity_id = $request->activity_id;
+        $archive->save();
+
+        (new LogActivity())->saveLog('telah melakukan update archive '.$id);
+
+        return redirect('/data/archive/'.$id.'/show');
     }
 
     /**
@@ -79,6 +135,15 @@ class ArchiveController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        Archive::destroy($id);
+
+        (new LogActivity())->saveLog('telah menghapus archive '.$id);
+
+        return redirect('/data/archive/');
     }
 }

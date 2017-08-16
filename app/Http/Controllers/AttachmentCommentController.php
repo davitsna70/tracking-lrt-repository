@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AttachmentComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;use App\LogActivity;
 
 class AttachmentCommentController extends Controller
 {
@@ -13,7 +15,15 @@ class AttachmentCommentController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachmentComments = AttachmentComment::paginate(10);
+
+        return view('data.attachment_comment.index')
+            ->with('attachment_comments', $attachmentComments);
     }
 
     /**
@@ -23,7 +33,12 @@ class AttachmentCommentController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        return view('data.attachment_comment.create');
     }
 
     /**
@@ -34,7 +49,24 @@ class AttachmentCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_comment = new AttachmentComment();
+        $attachment_comment->comment_id = $request->comment_id;
+        //$attachment_comment->lampiran = $request->lampiran;
+        if($request->hasFile('lampiran')){
+            $attachment_comment->nama_asli_lampiran = $request->file('lampiran')->getClientOriginalName();
+            $attachment_comment->lampiran = $request->file('lampiran')->store('public/comment');
+        }
+        $attachment_comment->waktu_pembuatan = date("Y-m-d h:i:s");
+        $attachment_comment->save();
+
+        (new LogActivity())->saveLog('telah menambahkan lampiran comment baru');
+
+        return redirect('/data/attachment_comment');
     }
 
     /**
@@ -45,7 +77,15 @@ class AttachmentCommentController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_comment = AttachmentComment::find($id);
+
+        return view('data.attachment_comment.show')
+            ->with('attachment_comment',$attachment_comment);
     }
 
     /**
@@ -56,7 +96,15 @@ class AttachmentCommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_comment = AttachmentComment::find($id);
+
+        return view('data.attachment_comment.edit')
+            ->with('attachment_comment', $attachment_comment);
     }
 
     /**
@@ -68,7 +116,23 @@ class AttachmentCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_comment = AttachmentComment::find($id);
+        $attachment_comment->comment_id = $request->comment_id;
+        //$attachment_comment->lampiran = $request->lampiran;
+        if($request->hasFile('lampiran')){
+            $attachment_comment->nama_asli_lampiran = $request->file('lampiran')->getClientOriginalName();
+            $attachment_comment->lampiran = $request->file('lampiran')->store('public/comment');
+        }
+        $attachment_comment->save();
+
+        (new LogActivity())->saveLog('telah melakukan update lampiran comment '.$id);
+
+        return redirect('/data/attachment_comment/'.$id.'/show');
     }
 
     /**
@@ -79,6 +143,15 @@ class AttachmentCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        AttachmentComment::destroy($id);
+
+        (new LogActivity())->saveLog('telah menghapus lampiran comment '.$id);
+
+        return redirect('/data/attachment_comment');
     }
 }

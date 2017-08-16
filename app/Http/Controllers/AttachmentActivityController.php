@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\AttachmentActivity;
+use App\AttachmentComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;use App\LogActivity;
 
 class AttachmentActivityController extends Controller
 {
@@ -13,7 +16,15 @@ class AttachmentActivityController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachmentActivities = AttachmentActivity::paginate(10);
+
+        return view('data.attachment_activity.index')
+            ->with('attachment_activities', $attachmentActivities);
     }
 
     /**
@@ -23,7 +34,12 @@ class AttachmentActivityController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        return view('data.attachment_activity.create');
     }
 
     /**
@@ -34,7 +50,24 @@ class AttachmentActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_activity = new AttachmentActivity();
+        $attachment_activity->activity_id = $request->activity_id;
+        //$attachment_activity->lampiran = $request->lampiran;
+        if($request->hasFile('lampiran')){
+            $attachment_activity->nama_asli_lampiran = $request->file('lampiran')->getClientOriginalName();
+            $attachment_activity->lampiran = $request->file('lampiran')->store('public/activity');
+        }
+        $attachment_activity->waktu_pembuatan = date("Y-m-d h:i:s");
+        $attachment_activity->save();
+
+        (new LogActivity())->saveLog('telah menambahkan lampiran activity baru');
+
+        return redirect('/data/attachment_activity/');
     }
 
     /**
@@ -45,7 +78,15 @@ class AttachmentActivityController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_activity = AttachmentActivity::find($id);
+
+        return view('data.attachment_activity.show')
+            ->with('attachment_activity',$attachment_activity);
     }
 
     /**
@@ -56,7 +97,15 @@ class AttachmentActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_activity = AttachmentActivity::find($id);
+
+        return view('data.attachment_activity.edit')
+            ->with('attachment_activity', $attachment_activity);
     }
 
     /**
@@ -68,7 +117,23 @@ class AttachmentActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        $attachment_activity = AttachmentActivity::find($id);
+        $attachment_activity->activity_id = $request->activity_id;
+        //$attachment_activity->lampiran = $request->lampiran;
+        if($request->hasFile('lampiran')){
+            $attachment_activity->nama_asli_lampiran = $request->file('lampiran')->getClientOriginalName();
+            $attachment_activity->lampiran = $request->file('lampiran')->store('public/activity');
+        }
+        $attachment_activity->save();
+
+        (new LogActivity())->saveLog('telah melakukan update lampiran activity '.$id);
+
+        return redirect('/data/attachment_activity/'.$id.'/show');
     }
 
     /**
@@ -79,6 +144,15 @@ class AttachmentActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::check())
+            Auth::user()->hasRole(['super_admin']);
+        else
+            redirect('/login');
+
+        AttachmentActivity::destroy($id);
+
+        (new LogActivity())->saveLog('telah menghapus lampiran activity '.$id);
+
+        return redirect('/data/attachment_activity');
     }
 }

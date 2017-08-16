@@ -30,6 +30,21 @@
     <!-- BackPack Base CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/backpack/backpack.base.css') }}">
 
+
+    <!-- It's Adding -->
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/datepicker/datepicker3.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/iCheck/all.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/colorpicker/bootstrap-colorpicker.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/') }}/plugins/select2/select2.min.css">
+
     @yield('after_styles')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,9 +52,20 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- jQuery 2.2.0 -->
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.0.min.js"><\/script>')</script>
+    {{--jQuery UI 1.12--}}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {{--<link rel="stylesheet" href="/resources/demos/style.css">--}}
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
     <![endif]-->
 </head>
-<body class="hold-transition {{ config('backpack.base.skin') }} sidebar-mini">
+<body class="hold-transition {{ config('backpack.base.skin') }} layout-boxed sidebar-mini" style="background-image:url('{{url('/storage/batik-bg.jpg')}}')">
+{{--<div class="container">--}}
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -100,15 +126,30 @@
 
     @yield('before_scripts')
 
-    <!-- jQuery 2.2.0 -->
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ asset('vendor/adminlte') }}/plugins/jQuery/jQuery-2.2.0.min.js"><\/script>')</script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('vendor/adminlte') }}/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/pace/pace.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/plugins/fastclick/fastclick.js"></script>
     <script src="{{ asset('vendor/adminlte') }}/dist/js/app.min.js"></script>
+
+    <!-- Adding For display form-->
+    <!-- Select2 -->
+    <script src="{{ asset('vendor/adminlte') }}/plugins/select2/select2.full.min.js"></script>
+    <!-- InputMask -->
+    <script src="{{ asset('vendor/adminlte') }}/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="{{ asset('vendor/adminlte') }}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="{{ asset('vendor/adminlte') }}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <!-- date-range-picker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <script src="{{ asset('vendor/adminlte') }}/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="{{ asset('vendor/adminlte') }}/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="{{ asset('vendor/adminlte') }}/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="{{ asset('vendor/adminlte') }}/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
 
     <!-- page script -->
     <script type="text/javascript">
@@ -136,6 +177,14 @@
         $('.nav-tabs a').on('shown.bs.tab', function (e) {
             location.hash = e.target.hash.replace("#tab_", "#");
         });
+
+        $('#notification-dropdown').on('click',
+            function () {
+                $('#notification-span').text('0');
+                $('#notification-text').text('You have 0 notifications');
+                $.get('/notification/read');
+            }
+        )
     </script>
 
     @include('backpack::inc.alerts')
@@ -144,5 +193,6 @@
 
     <!-- JavaScripts -->
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+{{--</div>--}}
 </body>
 </html>

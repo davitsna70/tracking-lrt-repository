@@ -178,6 +178,13 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Backpack\Base\BaseServiceProvider::class,
+        //log
+        Backpack\LogManager\LogManagerServiceProvider::class,
+        //backup
+        Spatie\Backup\BackupServiceProvider::class,
+        Backpack\BackupManager\BackupManagerServiceProvider::class,
+        //excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -226,7 +233,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        //excel
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

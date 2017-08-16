@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;use App\LogActivity;
 
 class GroupController extends Controller
 {
@@ -13,7 +15,12 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $groups = Group::paginate(10);
+
+        return view('data.group.index')
+            ->with('groups', $groups);
     }
 
     /**
@@ -23,7 +30,9 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        return view('data.group.create');
     }
 
     /**
@@ -34,7 +43,19 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $group = new Group();
+        $group->nama_group = $request->nama_group;
+        $group->alamat_kantor = $request->alamat_kantor;
+        $group->nomor_telepon = $request->nomor_telepon;
+        $group->fax = $request->fax;
+        $group->email = $request->email;
+        $group->save();
+
+        (new LogActivity())->saveLog('telah menambahkan grup baru');
+
+        return redirect('/data/group');
     }
 
     /**
@@ -45,7 +66,12 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $group = Group::find($id);
+
+        return view('data.group.show')
+            ->with('group', $group);
     }
 
     /**
@@ -56,7 +82,12 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $group = Group::find($id);
+
+        return view('data.group.edit')
+            ->with('group', $group);
     }
 
     /**
@@ -68,7 +99,19 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $group = Group::find($id);
+        $group->nama_group = $request->nama_group;
+        $group->alamat_kantor = $request->alamat_kantor;
+        $group->nomor_telepon = $request->nomor_telepon;
+        $group->fax = $request->fax;
+        $group->email = $request->email;
+        $group->save();
+
+        (new LogActivity())->saveLog('telah melakukan update grup '.$id);
+
+        return redirect('/data/group/'.$id.'/show');
     }
 
     /**
@@ -79,6 +122,12 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        Group::find($id)->delete();
+//        Group::destroy($id);
+        (new LogActivity())->saveLog('telah menghapus grup '.$id);
+
+        return redirect('/data/group/');
     }
 }

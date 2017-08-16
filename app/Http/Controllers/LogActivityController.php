@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\LogActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LogActivityController extends Controller
 {
@@ -13,7 +15,12 @@ class LogActivityController extends Controller
      */
     public function index()
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $logActivities = LogActivity::paginate(10);
+
+        return view('data.log_activity.index')
+            ->with('log_activities', $logActivities);
     }
 
     /**
@@ -23,7 +30,9 @@ class LogActivityController extends Controller
      */
     public function create()
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        return view('data.log_activity.create');
     }
 
     /**
@@ -34,7 +43,17 @@ class LogActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $log_activity = new LogActivity();
+        $log_activity->user_id = $request->user_id;
+        $log_activity->deskripsi = $request->deskripsi;
+        $log_activity->waktu_kegiatan = date("Y-m-d h:i:s");
+        $log_activity->save();
+
+        (new LogActivity())->saveLog('telah membuat log activity baru');
+
+        return redirect('/data/log_activity/');
     }
 
     /**
@@ -45,7 +64,12 @@ class LogActivityController extends Controller
      */
     public function show($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $log_activity = LogActivity::find($id);
+
+        return view('data.log_activity.show')
+            ->with('log_activity', $log_activity);
     }
 
     /**
@@ -56,7 +80,12 @@ class LogActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $log_activity = LogActivity::find($id);
+
+        return view('data.log_activity.edit')
+            ->with('log_activity', $log_activity);
     }
 
     /**
@@ -68,7 +97,17 @@ class LogActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        $log_activity = LogActivity::find($id);
+        $log_activity->user_id = $request->user_id;
+        $log_activity->deskripsi = $request->deskripsi;
+        $log_activity->waktu_kegiatan = date("Y-m-d h:i:s");
+        $log_activity->save();
+
+        (new LogActivity())->saveLog('telah melakukan update log activity '.$id);
+
+        return redirect('/data/log_activity/'.$id.'/show');
     }
 
     /**
@@ -79,6 +118,12 @@ class LogActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Auth::user()->hasRole(['super_admin']);
+
+        LogActivity::destroy($id);
+
+        (new LogActivity())->saveLog('telah menghapus log activity '.$id);
+
+        return redirect('/data/log_activity');
     }
 }

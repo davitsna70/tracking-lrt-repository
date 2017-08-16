@@ -18,6 +18,7 @@ class CreateProfilesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('foto_profil')->nullable();
+            $table->string('nama_asli_foto')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat_tinggal')->nullable();

@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role', 25)->nullable();
+            $table->enum('role', array('viewer', 'group_admin', 'member_group', 'super_admin'))->nullable();
             $table->integer('group_id')->unsigned()->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
             $table->rememberToken();

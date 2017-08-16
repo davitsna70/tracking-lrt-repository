@@ -18,6 +18,7 @@ class CreateAttachmentListTodosTable extends Migration
             $table->integer('list_to_do_id')->unsigned();
             $table->foreign('list_to_do_id')->references('id')->on('list_to_dos');
             $table->string('lampiran');
+            $table->string('nama_asli_lampiran');
             $table->dateTime('waktu_pembuatan');
         });
     }
