@@ -53,17 +53,17 @@
                 </div>
 
                 <!-- select -->
-                <div class="form-group {{$errors->has('hak_akses')?'has-error':''}}">
-                    <label>Hak Akses</label>
-                    <select class="form-control" name="hak_akses">
-                        <option value="" selected disabled="">--- Pilih Hak Akses ---</option>
-                        <option value="private">Private</option>
-                        <option value="team">Team</option>
-                        @if(\Illuminate\Support\Facades\Auth::user()->role != 'member_group')
+                @if(Auth::user()->role == 'super_admin')
+                    <div class="form-group {{$errors->has('hak_akses')?'has-error':''}}">
+                        <label>Hak Akses</label>
+                        <select class="form-control" name="hak_akses">
+                            <option value="" selected disabled="">--- Pilih Hak Akses ---</option>
+                            <option value="private">Private</option>
+                            <option value="team">Team</option>
                             <option value="public">Public</option>
-                        @endif
-                    </select>
-                </div>
+                        </select>
+                    </div>
+                @endif
 
                 <div class="form-group">
                     <label>Range Waktu:</label><br/>
@@ -90,17 +90,17 @@
                     <!-- /.input group -->
                 </div>
 
-                <div class="form-group {{$errors->has('status')?'has-error':''}}">
-                    <label>Status</label>
-                    <select class="form-control" name="status">
-                        <option value="" selected disabled>--- Pilih Status ---</option>
-                        <option value="plan">Plan</option>
-                        <option value="ongoing">On Going</option>
+                {{--<div class="form-group {{$errors->has('status')?'has-error':''}}">--}}
+                    {{--<label>Status</label>--}}
+                    {{--<select class="form-control" name="status">--}}
+                        {{--<option value="" selected disabled>--- Pilih Status ---</option>--}}
+                        {{--<option value="plan">Plan</option>--}}
+                        {{--<option value="ongoing">On Going</option>--}}
                         {{--<option value="late">Late</option>--}}
-                        <option value="pending">Pending</option>
+                        {{--<option value="pending">Pending</option>--}}
                         {{--<option value="done">Done</option>--}}
-                    </select>
-                </div>
+                    {{--</select>--}}
+                {{--</div>--}}
 
                 <div class="form-group" id="checklist">
                     <label for="checklist">Check List :</label>  <button type="button" id="checklist-more" class="btn btn-primary btn-xs">Add More Checklist</button>

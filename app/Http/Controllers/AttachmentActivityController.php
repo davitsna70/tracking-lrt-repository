@@ -16,10 +16,7 @@ class AttachmentActivityController extends Controller
      */
     public function index()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachmentActivities = AttachmentActivity::paginate(10);
 
@@ -34,10 +31,7 @@ class AttachmentActivityController extends Controller
      */
     public function create()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         return view('data.attachment_activity.create');
     }
@@ -50,10 +44,7 @@ class AttachmentActivityController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_activity = new AttachmentActivity();
         $attachment_activity->activity_id = $request->activity_id;
@@ -78,10 +69,7 @@ class AttachmentActivityController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_activity = AttachmentActivity::find($id);
 
@@ -97,10 +85,7 @@ class AttachmentActivityController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_activity = AttachmentActivity::find($id);
 
@@ -117,10 +102,7 @@ class AttachmentActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_activity = AttachmentActivity::find($id);
         $attachment_activity->activity_id = $request->activity_id;
@@ -144,10 +126,7 @@ class AttachmentActivityController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         AttachmentActivity::destroy($id);
 

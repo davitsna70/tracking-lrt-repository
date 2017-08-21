@@ -31,6 +31,8 @@ class Kernel extends ConsoleKernel
 //        })->everyMinute();
 
         $schedule->call('App\Http\Controllers\MenuActivityController@lateActivity')->daily();
+        $schedule->call('App\Http\Controllers\MenuActivityController@ongoingActivity')->daily();
+        $schedule->call('App\Http\Controllers\MenuActivityController@rangeTimeActivity')->daily();
     }
 
     /**

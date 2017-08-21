@@ -27,12 +27,15 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h3>Information</h3>
-                                    <p>
-                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                    </p>
-                                    <p>
-                                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-                                    </p>
+                                    <h4><strong>Jakarta LRT</strong></h4>
+                                    <p>Jakarta Light Rail Transit atau disingkat Jakarta LRT adalah sebuah sistem MassTransit dengan kereta api ringan (LRT) yang direncanakan akan dibangun di Jakarta, Indonesia dan menghubungkan Jakarta dengan kota-kota disekitarnya seperti Bekasi dan Bogor. Ada 2 penggagas LRT di Jakarta, Pemprov DKI yang akan membangun LRT dalam kota dan PT Adhi Karya yang akan membangun penghubung Jakarta ke kota sekitarnya.</p>
+                                    <br>
+                                    <h5><strong>Sejarah</strong></h5>
+                                    <p>Gagasan LRT Jakarta mulai muncul ketika Proyek Monorel Jakarta yang sempat diaktifkan kembali pada Oktober 2013 oleh Gubernur DKI saat itu, Joko Widodo tersendat pengerjaannya. Tersendatnya pekerjaan tersebut karena Pemprov DKI dan Gubernur DKI penerus Joko Widodo, Basuki Tjahaja Purnama (Ahok) tidak akan mengabulkan permintaan yang diajukan oleh PT Jakarta Monorail untuk membangun depo di atas Waduk Setiabudi, Jakarta Selatan dan Tanah Abang, Jakarta Pusat. Sebab, hasil kajian Kementerian Pekerjaan Umum dan Perumahan Rakyat (Kementerian PU-Pera) menyatakan bahwa jika depo dibangun di atas Waduk Setiabudi, dikhawatirkan peristiwa jebolnya tanggul Latuharhari terulang kembali.</p>
+                                    <p>Ahok, sapaan Basuki, lebih memilih untuk membangun Light Rail Transit (LRT) dibandingkan monorel. Bahkan, Basuki telah mengungkapkan rencana pembangunan ini kepada Presiden Joko Widodo.</p>
+                                    <p>Adhi Karya yang semula berniat membangun jalur monorel Cibubur-Cawang-Grogol dan Bekasi-Cawang, mendapat perintah dari Presiden Joko Widodo untuk mengubah konsep monorel menjadi LRT juga. Adapun alasan dibangunnya LRT karena lebih mudah terintegrasi dengan moda lainnya (MRT dan KRL) daripada monorel yang populasinya sedikit karena teknologinya tertutup.</p>
+                                    <p>Sumber dari:</p>
+                                    <a href="https://id.wikipedia.org/wiki/Jakarta_LRT">Wikipedia : Jakarta LRT</a>
                                 </div>
                             </div>
                         </div>

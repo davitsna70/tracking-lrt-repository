@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <div id="example1_filter" class="dataTables_filter">
-                            <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
+                            {{--<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>--}}
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -70,7 +70,7 @@
                                     <td class="">{{ $user['name']}}</td>
                                     <td class="">{{ $user['email'] }}</td>
                                     <td class="">{{ $user['role'] }}</td>
-                                    <td class="">{{ $user['group_id'] }}</td>
+                                    <td class="">{{ $user['group_id'].' - '.$user->group->nama_group }}</td>
                                     <td class="">
                                         <a href="{{url('/group_admin/'.$user->id.'/show')}}" style="display:inline-block;"><button class="btn btn-sm btn-primary"><span class="fa fa-eye"></span> Show</button></a>
                                         <a href="{{url('/group_admin/'.$user->id.'/edit')}}" style="display:inline-block;"><button class="btn btn-sm btn-warning"><span class="fa fa-edit"></span> Edit</button></a>

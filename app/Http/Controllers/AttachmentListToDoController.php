@@ -16,10 +16,7 @@ class AttachmentListToDoController extends Controller
      */
     public function index()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachmentListToDos = AttachmentListToDo::paginate(10);
 
@@ -34,10 +31,7 @@ class AttachmentListToDoController extends Controller
      */
     public function create()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         return view('data.attachment_list_to_do.create');
     }
@@ -50,10 +44,7 @@ class AttachmentListToDoController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_list_to_do = new AttachmentListToDo();
         $attachment_list_to_do->list_to_do_id = $request->list_to_do;
@@ -78,10 +69,7 @@ class AttachmentListToDoController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_list_to_do = AttachmentListToDo::find($id);
 
@@ -97,10 +85,7 @@ class AttachmentListToDoController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_list_to_do = AttachmentListToDo::find($id);
 
@@ -117,10 +102,7 @@ class AttachmentListToDoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_list_to_do = AttachmentListToDo::find($id);
         $attachment_list_to_do->list_to_do_id = $request->list_to_do;
@@ -144,6 +126,8 @@ class AttachmentListToDoController extends Controller
      */
     public function destroy($id)
     {
+        Auth::user()->hasRole(['super_admin']);
+
         AttachmentListToDo::destroy($id);
 
         (new LogActivity())->saveLog('telah menghapus lampiran list to do '.$id);

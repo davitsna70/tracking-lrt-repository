@@ -13,6 +13,8 @@ use App\Notifications\CommentToActivity;
 use App\Notifications\DoneChecklist;
 use App\Notifications\FinishActivity;
 use App\Notifications\LateActivity;
+use App\Notifications\OngoingActivity;
+use App\Notifications\RangeDateLate;
 use App\Notifications\UndoneChecklist;
 use App\Notifications\UpdateActivity;
 use App\User;
@@ -25,10 +27,10 @@ class MenuActivityController extends Controller
 {
     private $rules = [
         'judul'=>'required',
-        'hak_akses'=>'required',
+//        'hak_akses'=>'required',
         'tanggal_mulai'=>'required',
         'tanggal_berakhir'=>'required',
-        'status'=>'required'
+//        'status'=>'required'
     ];
     /**
      * Display a listing of the resource.
@@ -37,7 +39,7 @@ class MenuActivityController extends Controller
      */
     public function index()
     {
-        $activities = $this->getPrivateActivities();
+        $activities = $this->getPublicActivities();
 //        dd($this->getPrivateActivities());
         return view('user.activity.activity')
             ->with('activities', $activities);
@@ -102,10 +104,22 @@ class MenuActivityController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->judul = $request->judul;
         $activity->deskripsi = ($request->deskripsi==null || $request->deskripsi=="")? null : $request->deskripsi;
-        $activity->hak_akses = $request->hak_akses;
+        if (Auth::user()->role=='super_admin') {
+            $activity->hak_akses = $request->hak_akses;
+        }else{
+            $activity->hak_akses = 'team';
+        }
         $activity->tanggal_mulai = date("Y-m-d", strtotime($request->tanggal_mulai));
         $activity->tanggal_berakhir = date("Y-m-d", strtotime($request->tanggal_berakhir));
-        $activity->status = $request->status;
+        if(date('Y-m-d')<date('Y-m-d', strtotime($activity->tanggal_mulai))){
+            $activity->status = 'plan';
+        }
+        else if (date('Y-m-d')>=date('Y-m-d', strtotime($activity->tanggal_mulai)) && date('Y-m-d')<=date('Y-m-d', strtotime($activity->tanggal_berakhir))){
+            $activity->status = 'ongoing';
+        }
+        else{
+            $activity->status = 'late';
+        }
         $activity->save();
 
         $activity = Activity::all()
@@ -193,14 +207,16 @@ class MenuActivityController extends Controller
 
         if(Auth::user()->role == 'member_group'){
             $items = User::where('name', 'like', '%'.$term.'%')
+                ->where('role','=','member_group')
                 ->where('group_id', '=', Auth::user()->group->id)
                 ->get();
         }
         elseif (Auth::user()->role == 'group_admin'){
             $items = User::where('role','=','group_admin')
                 ->where('name', 'like', '%'.$term.'%')
-                ->orWhere('role','=', 'viewer')
-                ->where('name', 'like', '%'.$term.'%')
+                ->where('group_id', '=', Auth::user()->group->id)
+//                ->orWhere('role','=', 'viewer')
+//                ->where('name', 'like', '%'.$term.'%')
                 ->orWhere('role','=','member_group')
                 ->where('name', 'like', '%'.$term.'%')
                 ->where('group_id', '=', Auth::user()->group->id)
@@ -209,8 +225,10 @@ class MenuActivityController extends Controller
         else{
             $items = User::where('role','=','group_admin')
                 ->where('name', 'like', '%'.$term.'%')
-                ->orWhere('role','=', 'viewer')
+                ->orWhere('role','=','member_group')
                 ->where('name', 'like', '%'.$term.'%')
+//                ->orWhere('role','=', 'viewer')
+//                ->where('name', 'like', '%'.$term.'%')
                 ->get();
         }
 
@@ -249,10 +267,24 @@ class MenuActivityController extends Controller
         $activity->user_id = Auth::user()->id;
         $activity->judul = $request->judul;
         $activity->deskripsi = ($request->deskripsi==null || $request->deskripsi=="")? null : $request->deskripsi;
-        $activity->hak_akses = $request->hak_akses;
+        if (Auth::user()->role == 'super_admin') {
+            $activity->hak_akses = $request->hak_akses;
+        }
+        else{
+            $activity->hak_akses = 'team';
+        }
         $activity->tanggal_mulai = date("Y-m-d", strtotime($request->tanggal_mulai));
         $activity->tanggal_berakhir = date("Y-m-d", strtotime($request->tanggal_berakhir));
-        $activity->status = $request->status;
+        if(date('Y-m-d')<date('Y-m-d', strtotime($activity->tanggal_mulai))){
+            $activity->status = 'plan';
+        }
+        else if (date('Y-m-d')>=date('Y-m-d', strtotime($activity->tanggal_mulai)) && date('Y-m-d')<=date('Y-m-d', strtotime($activity->tanggal_berakhir))){
+            $activity->status = 'ongoing';
+        }
+        else{
+            $activity->status = 'late';
+        }
+//        $activity->status = $request->status;
         $activity->save();
 
         $activity = Activity::all()
@@ -341,7 +373,7 @@ class MenuActivityController extends Controller
 
     public function show($id)
     {
-        Auth::user()->hasRole(['super_admin', 'viewer', 'group_admin', 'member_group']);
+        Auth::user()->hasRole(['super_admin', 'group_admin', 'member_group']);
 
         $activity = Activity::find($id);
         $comments = Comment::where('activity_id', '=', $id)->get();
@@ -441,7 +473,16 @@ class MenuActivityController extends Controller
 
         if($listToDo->activity->status == 'done'){
             $activity = Activity::find($listToDo->activity->id);
-            $activity->status = 'ongoing';
+            if(date('Y-m-d')<date('Y-m-d', strtotime($activity->tanggal_mulai))){
+                $activity->status = 'plan';
+            }
+            else if (date('Y-m-d')>=date('Y-m-d', strtotime($activity->tanggal_mulai)) && date('Y-m-d')<=date('Y-m-d', strtotime($activity->tanggal_berakhir))){
+                $activity->status = 'ongoing';
+            }
+            else{
+                $activity->status = 'late';
+            }
+//            $activity->status = 'ongoing';
             $activity->waktu_selesai = null;
             $activity->save();
         }
@@ -482,6 +523,50 @@ class MenuActivityController extends Controller
 
             foreach ($userActivities as $userActivity){
                 $userActivity->user->notify(new LateActivity($activity));
+            }
+        }
+    }
+
+    public function ongoingActivity(){
+        $activities = Activity::where('status', '=', 'plan')
+            ->where('tanggal_mulai', '<=', date('Y-m-d'))
+            ->where('tanggal_berakhir','>=', date('Y-m-d'))
+            ->get();
+//        if($activities == null){
+//            echo 'null';
+//        }
+//        else{
+//            echo 'not null';
+//            dd($activities);
+//        }
+
+        foreach ($activities as $activity){
+            echo $activity->id.'shgdahgdsa';
+            $activity->user->notify(new OngoingActivity($activity));
+            $userActivities = UserActivity::where('activity_id', '=', $activity->id);
+
+            $activity->status = 'ongoing';
+            $activity->save();
+
+            foreach ($userActivities as $userActivity){
+                $userActivity->user->notify(new OngoingActivity($activity));
+            }
+        }
+    }
+
+    public function rangeTimeActivity(){
+        $activities = Activity::where('status', '=', 'ongoing')
+            ->get();
+
+        foreach ($activities as $activity){
+            $rangeTime = ceil(abs((strtotime($activity->tanggal_berakhir)-strtotime(date('Y-m-d')))/86400));
+            if($rangeTime<=5) {
+                $activity->user->notify(new RangeDateLate($activity, $rangeTime));
+                $userActivities = UserActivity::where('activity_id', '=', $activity->id);
+
+                foreach ($userActivities as $userActivity) {
+                    $userActivity->user->notify(new RangeDateLate($activity, $rangeTime));
+                }
             }
         }
     }

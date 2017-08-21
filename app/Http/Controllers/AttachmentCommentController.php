@@ -15,10 +15,7 @@ class AttachmentCommentController extends Controller
      */
     public function index()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachmentComments = AttachmentComment::paginate(10);
 
@@ -33,10 +30,7 @@ class AttachmentCommentController extends Controller
      */
     public function create()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         return view('data.attachment_comment.create');
     }
@@ -49,10 +43,7 @@ class AttachmentCommentController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_comment = new AttachmentComment();
         $attachment_comment->comment_id = $request->comment_id;
@@ -77,10 +68,7 @@ class AttachmentCommentController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_comment = AttachmentComment::find($id);
 
@@ -96,10 +84,7 @@ class AttachmentCommentController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_comment = AttachmentComment::find($id);
 
@@ -116,10 +101,7 @@ class AttachmentCommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $attachment_comment = AttachmentComment::find($id);
         $attachment_comment->comment_id = $request->comment_id;
@@ -143,10 +125,7 @@ class AttachmentCommentController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         AttachmentComment::destroy($id);
 

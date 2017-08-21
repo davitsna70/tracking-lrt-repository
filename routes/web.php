@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', 'PublicController@timeline');
+Route::get('/home/date', 'PublicController@timelineWithData');
+Route::get('/', 'PublicController@timeline');
 
 Route::get('/profile/photo/{filename}', 'FileController@getProfilePhoto')->middleware('auth');
 Route::get('/list_to_do/file/{filename}', 'FileController@getListToDoFile')->middleware('auth');

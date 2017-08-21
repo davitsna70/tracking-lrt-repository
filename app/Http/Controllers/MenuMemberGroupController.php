@@ -18,9 +18,12 @@ class MenuMemberGroupController extends Controller
     public function index()
     {
         Auth::user()->hasRole(['super_admin', 'group_admin']);
-
-        $users = User::where('role','=','member_group')->where('group_id','=',Auth::user()->group_id)->paginate(10);
-
+        if (Auth::user()->role=='super_admin'){
+            $users = User::where('role', '=', 'member_group')->paginate(10);
+        }
+        else {
+            $users = User::where('role', '=', 'member_group')->where('group_id', '=', Auth::user()->group_id)->paginate(10);
+        }
         return view('user.member_group.index')
             ->with('users',$users);
     }
@@ -156,8 +159,8 @@ class MenuMemberGroupController extends Controller
     {
         Auth::user()->hasRole(['super_admin', 'group_admin']);
 
-        User::destroy($id);
-
+//        User::destroy($id);
+        User::find($id)->delete();
         (new LogActivity())->saveLog('telah menghapus grup admin '.$id);
 
         return redirect('/member_group/');

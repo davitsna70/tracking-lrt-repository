@@ -29,9 +29,18 @@
                                     {{--{{csrf_field()}}--}}
                                     <div class="form-group">
                                         <select class="form-control" name="hak_akses">
-                                            <option value="private">Private</option>
-                                            <option value="team">Team</option>
-                                            <option value="public">Public</option>
+                                            @if(Auth::user()->role=='super_admin')
+                                                <option value="public">Public</option>
+                                                <option value="team">Team</option>
+                                                <option value="private">Private</option>
+                                                @elseif(Auth::user()->role=='group_admin')
+                                                <option value="public">Public</option>
+                                                <option value="team">Team</option>
+                                                @else
+                                                <option value="public">Public</option>
+                                                <option value="team">Team</option>
+                                            @endif
+
                                         </select>
                                         <button class="btn btn-default"><span class="fa fa-search"></span> Look</button>
                                     </div>
@@ -56,7 +65,7 @@
                             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Plan</a></li>
                             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">On Going (Process)</a></li>
                             <li class=""><a href="#tab_3" data-toggle="tab" aria-expanded="false">Late</a></li>
-                            <li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Pending</a></li>
+                            {{--<li class=""><a href="#tab_4" data-toggle="tab" aria-expanded="false">Pending</a></li>--}}
                             <li class=""><a href="#tab_5" data-toggle="tab" aria-expanded="false">Done</a></li>
                             {{--<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>--}}
                         </ul>
@@ -213,55 +222,55 @@
                                 @endforelse
                             </div>
                             <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_4">
-                                @forelse($activities as $activity)
-                                    @if($activity->status === "pending")
-                                        <h3><b>Activities : {{$activity->judul}}</b></h3>
-                                        @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
-                                            <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
-                                        @else
-                                            <a href="/archive/add/{{$activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
-                                        @endif
-                                        <div class="post row">
-                                            <div class="col-sm-5">
-                                                Created By
-                                                <div class="user-block">
-                                                    <img title="{{\App\Activity::find($activity->id)->user->name}}" class="img-circle img-bordered-sm" src="{{url("/profile/photo/".
-                                                basename(\App\Activity::find($activity->id)->user->profile->foto_profil))}}" alt="user image">
-                                                    <span class="username">
-                                              <a href="#">{{\App\Activity::find($activity->id)->user->name}}</a>
+                            {{--<div class="tab-pane" id="tab_4">--}}
+                                {{--@forelse($activities as $activity)--}}
+                                    {{--@if($activity->status === "pending")--}}
+                                        {{--<h3><b>Activities : {{$activity->judul}}</b></h3>--}}
+                                        {{--@if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)--}}
+                                            {{--<a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>--}}
+                                        {{--@else--}}
+                                            {{--<a href="/archive/add/{{$activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>--}}
+                                        {{--@endif--}}
+                                        {{--<div class="post row">--}}
+                                            {{--<div class="col-sm-5">--}}
+                                                {{--Created By--}}
+                                                {{--<div class="user-block">--}}
+                                                    {{--<img title="{{\App\Activity::find($activity->id)->user->name}}" class="img-circle img-bordered-sm" src="{{url("/profile/photo/".--}}
+                                                {{--basename(\App\Activity::find($activity->id)->user->profile->foto_profil))}}" alt="user image">--}}
+                                                    {{--<span class="username">--}}
+                                              {{--<a href="#">{{\App\Activity::find($activity->id)->user->name}}</a>--}}
                                                         {{--<a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>--}}
-                                            </span>
-                                                    <span class="description">
-                                                Shared publicly - {{$activity->created_at}}<br/>
-                                                Due Time : from {{$activity->tanggal_mulai}} until {{$activity->tanggal_berakhir}}
-                                            </span>
-                                                    @if($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)
-                                                        <a href="{{url('/activity/'.$activity->id.'/edit')}}"><button type="button" class="btn btn-warning btn-sm" data-target="#detailActivity" >Edit</button></a>
-                                                    @endif
-                                                    <a href="{{url('/activity/'.$activity->id.'/show')}}"><button type="button" class="btn btn-primary btn-sm" data-target="#detailActivity" >Detail</button></a>
+                                            {{--</span>--}}
+                                                    {{--<span class="description">--}}
+                                                {{--Shared publicly - {{$activity->created_at}}<br/>--}}
+                                                {{--Due Time : from {{$activity->tanggal_mulai}} until {{$activity->tanggal_berakhir}}--}}
+                                            {{--</span>--}}
+                                                    {{--@if($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)--}}
+                                                        {{--<a href="{{url('/activity/'.$activity->id.'/edit')}}"><button type="button" class="btn btn-warning btn-sm" data-target="#detailActivity" >Edit</button></a>--}}
+                                                    {{--@endif--}}
+                                                    {{--<a href="{{url('/activity/'.$activity->id.'/show')}}"><button type="button" class="btn btn-primary btn-sm" data-target="#detailActivity" >Detail</button></a>--}}
 
-                                                </div>
-                                            </div>
+                                                {{--</div>--}}
+                                            {{--</div>--}}
                                             {{--<p>--}}
                                             {{--{{$user_activity->activity->deskripsi}}--}}
                                             {{--</p>--}}
-                                            <div class="col-sm-7">
-                                                <p>Member : </p>
-                                                <div class="user-block">
-                                                    @foreach(\App\UserActivity::all()->where('activity_id', '=', $activity->id) as $member)
-                                                        <img title="{{$member->user->name}}" class="img-circle img-bordered-sm" src="{{url("/profile/photo/".basename($member->user->profile->foto_profil))}}"
-                                                             alt="image not found">
-                                                    @endforeach
-                                                </div>
-                                                <!-- /.user-block -->
+                                            {{--<div class="col-sm-7">--}}
+                                                {{--<p>Member : </p>--}}
+                                                {{--<div class="user-block">--}}
+                                                    {{--@foreach(\App\UserActivity::all()->where('activity_id', '=', $activity->id) as $member)--}}
+                                                        {{--<img title="{{$member->user->name}}" class="img-circle img-bordered-sm" src="{{url("/profile/photo/".basename($member->user->profile->foto_profil))}}"--}}
+                                                             {{--alt="image not found">--}}
+                                                    {{--@endforeach--}}
+                                                {{--</div>--}}
+                                                {{--<!-- /.user-block -->--}}
                                                 {{--<a href="#" class="btn btn-primary"><span class="fa fa-eye"></span> Detail</a>--}}
-                                            </div></div>
-                                    @endif
-                                @empty
-                                    Tidak ada activity yang tersedia...
-                                @endforelse
-                            </div>
+                                            {{--</div></div>--}}
+                                    {{--@endif--}}
+                                {{--@empty--}}
+                                    {{--Tidak ada activity yang tersedia...--}}
+                                {{--@endforelse--}}
+                            {{--</div>--}}
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="tab_5">
                                 @forelse($activities as $activity)

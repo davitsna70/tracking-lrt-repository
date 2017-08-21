@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col-sm-10">
                         <div id="example1_filter" class="dataTables_filter">
-                            <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
+                            {{--<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>--}}
                         </div>
                     </div>
                     <div class="col-sm-2">

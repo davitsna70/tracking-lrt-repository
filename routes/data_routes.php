@@ -106,15 +106,15 @@ Route::group(['prefix'=>'data'],function (){
         Route::put('{id}/update', 'ListToDoController@update')->middleware('auth');
         Route::delete('{id}/delete', 'ListToDoController@destroy')->middleware('auth');
     });
-    Route::group(['prefix'=>'message'],function (){
-        Route::get('/', 'MessageController@index')->middleware('auth');
-        Route::get('/create', 'MessageController@create')->middleware('auth');
-        Route::post('/save', 'MessageController@store')->middleware('auth');
-        Route::get('{id}/show', 'MessageController@show')->middleware('auth');
-        Route::get('{id}/edit', 'MessageController@edit')->middleware('auth');
-        Route::put('{id}/update', 'MessageController@update')->middleware('auth');
-        Route::delete('{id}/delete', 'MessageController@destroy')->middleware('auth');
-    });
+//    Route::group(['prefix'=>'message'],function (){
+//        Route::get('/', 'MessageController@index')->middleware('auth');
+//        Route::get('/create', 'MessageController@create')->middleware('auth');
+//        Route::post('/save', 'MessageController@store')->middleware('auth');
+//        Route::get('{id}/show', 'MessageController@show')->middleware('auth');
+//        Route::get('{id}/edit', 'MessageController@edit')->middleware('auth');
+//        Route::put('{id}/update', 'MessageController@update')->middleware('auth');
+//        Route::delete('{id}/delete', 'MessageController@destroy')->middleware('auth');
+//    });
 //    Route::group(['prefix'=>'notification'],function (){
 //        Route::get('/', 'NotificationController@index')->middleware('auth');
 //        Route::get('/create', 'NotificationController@create')->middleware('auth');

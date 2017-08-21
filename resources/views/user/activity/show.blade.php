@@ -72,7 +72,7 @@
                                         </tr>
                                         <tr>
                                             <td>Deskripsi </td>
-                                            <td>: {{$activity->deskripsi}}</td>
+                                            <td>: <?= nl2br( $activity->deskripsi)?></td>
                                         </tr>
                                         @if($activity->attachment_activities!=null)
                                             @foreach($activity->attachment_activities as $lampiran)

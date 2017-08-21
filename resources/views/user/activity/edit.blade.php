@@ -58,6 +58,7 @@
                 </div>
 
                 <!-- select -->
+                @if(Auth::user()->role == 'super_admin')
                 <div class="form-group {{$errors->has('hak_akses')?'has-error':''}}">
                     <label>Hak Akses</label>
                     <select class="form-control " {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} name="hak_akses">
@@ -69,6 +70,7 @@
                         @endif
                     </select>
                 </div>
+                @endif
 
                 <div class="form-group">
                     <label>Range Waktu:</label><br/>
@@ -95,17 +97,17 @@
                     <!-- /.input group -->
                 </div>
 
-                <div class="form-group {{$errors->has('status')?'has-error':''}}">
-                    <label>Status</label>
-                    <select class="form-control "{{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} name="status">
-                        <option value="" disabled>--- Pilih Status ---</option>
-                        <option value="plan" {{($activity->status =='plan')? 'selected':''}}>Plan</option>
-                        <option value="ongoing" {{($activity->status =='ongoing')? 'selected':''}}>On Going</option>
+                {{--<div class="form-group {{$errors->has('status')?'has-error':''}}">--}}
+                    {{--<label>Status</label>--}}
+                    {{--<select class="form-control "{{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} name="status">--}}
+                        {{--<option value="" disabled>--- Pilih Status ---</option>--}}
+                        {{--<option value="plan" {{($activity->status =='plan')? 'selected':''}}>Plan</option>--}}
+                        {{--<option value="ongoing" {{($activity->status =='ongoing')? 'selected':''}}>On Going</option>--}}
                         {{--<option value="late">Late</option>--}}
-                        <option value="pending" {{($activity->status =='pending')? 'selected':''}}>Pending</option>
+                        {{--<option value="pending" {{($activity->status =='pending')? 'selected':''}}>Pending</option>--}}
                         {{--<option value="done">Done</option>--}}
-                    </select>
-                </div>
+                    {{--</select>--}}
+                {{--</div>--}}
 
                 <div class="form-group  " {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} id="checklist">
                     <label for="checklist">Check List :</label>  <button type="button" id="checklist-more" class="btn btn-primary btn-xs">Add More Checklist</button>

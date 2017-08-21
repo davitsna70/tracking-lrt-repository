@@ -15,10 +15,7 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $activities = Activity::paginate(10);
 
@@ -33,10 +30,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         return view('data.activity.create');
     }
@@ -50,10 +44,7 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
 
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $activity = new Activity();
         $activity->user_id = $request->user_id;
@@ -79,10 +70,7 @@ class ActivityController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $activity = Activity::find($id);
         return view('data.activity.show')
@@ -97,10 +85,7 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $activity = Activity::find($id);
         return view('data.activity.edit')
@@ -116,10 +101,7 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $activity = Activity::find($id);
         $activity->user_id = $request->user_id;
@@ -146,10 +128,7 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         Activity::find($id)->delete();
 

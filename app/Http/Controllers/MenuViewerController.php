@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -59,6 +60,7 @@ class MenuViewerController extends Controller
         $profile->user_id = $user->id;
         $profile->foto_profil = 'na.png';
         $profile->nama_asli_foto = 'na.png';
+        $profile->waktu_update = date("Y-m-d h:i:s");
         $profile->save();
 
         (new LogActivity())->saveLog('telah menyimpan user viewer baru');
@@ -109,11 +111,6 @@ class MenuViewerController extends Controller
     {
         Auth::user()->hasRole(['super_admin']);
 
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
-
         $user = User::find($id);
         $user->name = $request->nama;
         $user->email = $request->email;
@@ -136,8 +133,8 @@ class MenuViewerController extends Controller
     {
         Auth::user()->hasRole(['super_admin']);
 
-        User::destroy($id);
-
+//        User::destroy($id);
+        User::find($id)->delete();
         (new LogActivity())->saveLog('telah menghapus viewer '.$id);
 
         return redirect('/viewer/');

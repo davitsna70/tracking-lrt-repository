@@ -12,7 +12,7 @@
 
 
 <div class="navbar-custom-menu">
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" style="font-size: 16px">
         <!-- ========================================================= -->
         <!-- ========== Top menu right items (ordered left) ========== -->
         <!-- ========================================================= -->
@@ -20,90 +20,13 @@
     <!-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> <span>Home</span></a></li> -->
 
         @if (\Illuminate\Support\Facades\Auth::guest())
-            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/login') }}">{{ trans('backpack::base.login') }}</a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/login') }}"><span class="fa fa-sign-in"></span> {{ trans('backpack::base.login') }}</a></li>
             @if (config('backpack.base.registration_open'))
                 {{--                <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/register') }}">{{ trans('backpack::base.register') }}</a></li>--}}
             @endif
         @else
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                {{--<!-- Messages: style can be found in dropdown.less-->--}}
-                {{--<li class="dropdown messages-menu">--}}
-                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                {{--<i class="fa fa-envelope-o"></i>--}}
-                {{--<span class="label label-success">4</span>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                {{--<li class="header">You have 4 messages</li>--}}
-                {{--<li>--}}
-                {{--<!-- inner menu: contains the actual data -->--}}
-                {{--<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">--}}
-                {{--<li><!-- start message -->--}}
-                {{--<a href="#">--}}
-                {{--<div class="pull-left">--}}
-                {{--<img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">--}}
-                {{--</div>--}}
-                {{--<h4>--}}
-                {{--Support Team--}}
-                {{--<small><i class="fa fa-clock-o"></i> 5 mins</small>--}}
-                {{--</h4>--}}
-                {{--<p>Why not buy a new awesome theme?</p>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end message -->--}}
-                {{--<li>--}}
-                {{--<a href="#">--}}
-                {{--<div class="pull-left">--}}
-                {{--<img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">--}}
-                {{--</div>--}}
-                {{--<h4>--}}
-                {{--AdminLTE Design Team--}}
-                {{--<small><i class="fa fa-clock-o"></i> 2 hours</small>--}}
-                {{--</h4>--}}
-                {{--<p>Why not buy a new awesome theme?</p>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                {{--<a href="#">--}}
-                {{--<div class="pull-left">--}}
-                {{--<img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">--}}
-                {{--</div>--}}
-                {{--<h4>--}}
-                {{--Developers--}}
-                {{--<small><i class="fa fa-clock-o"></i> Today</small>--}}
-                {{--</h4>--}}
-                {{--<p>Why not buy a new awesome theme?</p>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                {{--<a href="#">--}}
-                {{--<div class="pull-left">--}}
-                {{--<img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">--}}
-                {{--</div>--}}
-                {{--<h4>--}}
-                {{--Sales Department--}}
-                {{--<small><i class="fa fa-clock-o"></i> Yesterday</small>--}}
-                {{--</h4>--}}
-                {{--<p>Why not buy a new awesome theme?</p>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                {{--<a href="#">--}}
-                {{--<div class="pull-left">--}}
-                {{--<img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">--}}
-                {{--</div>--}}
-                {{--<h4>--}}
-                {{--Reviewers--}}
-                {{--<small><i class="fa fa-clock-o"></i> 2 days</small>--}}
-                {{--</h4>--}}
-                {{--<p>Why not buy a new awesome theme?</p>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--</ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>--}}
-                {{--</li>--}}
-                {{--<li class="footer"><a href="#">See All Messages</a></li>--}}
-                {{--</ul>--}}
-                {{--</li>--}}
                 <!-- Notifications: style can be found in dropdown.less -->
                     <li class="dropdown notifications-menu" id="notification-dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -133,7 +56,7 @@
                             <span class="label label-danger">{{count(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->get()) + count(\App\Activity::where('user_id', '=', Auth::user()->id)->get())}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have {{count(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->get()) + count(\App\Activity::where('user_id', '=', Auth::user()->id)->get())}} tasks</li>
+                            <li class="header">You have {{count(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->get()) + count(\App\Activity::where('user_id', '=', Auth::user()->id)->get())}} activities</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
@@ -177,7 +100,7 @@
                                 </div>
                             </li>
                             <li class="footer">
-                                <a href="/notification/task">View all tasks</a>
+                                <a href="/notification/task">View all activities</a>
                             </li>
                         </ul>
                     </li>

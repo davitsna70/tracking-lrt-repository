@@ -15,10 +15,7 @@ class ArchiveController extends Controller
      */
     public function index()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $archives = Archive::paginate(10);
 
@@ -33,10 +30,7 @@ class ArchiveController extends Controller
      */
     public function create()
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         return view('data.archive.create');
     }
@@ -49,10 +43,7 @@ class ArchiveController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $archive = new Archive();
         $archive->user_id = $request->user_id;
@@ -73,10 +64,7 @@ class ArchiveController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $archive = Archive::find($id);
 
@@ -92,10 +80,7 @@ class ArchiveController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $archive = Archive::find($id);
 
@@ -112,10 +97,7 @@ class ArchiveController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         $archive = Archive::find($id);
         $archive->user_id = $request->user_id;
@@ -135,10 +117,7 @@ class ArchiveController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check())
-            Auth::user()->hasRole(['super_admin']);
-        else
-            redirect('/login');
+        Auth::user()->hasRole(['super_admin']);
 
         Archive::destroy($id);
 

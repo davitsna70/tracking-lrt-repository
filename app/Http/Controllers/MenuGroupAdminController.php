@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -59,6 +60,7 @@ class MenuGroupAdminController extends Controller
         $profile->user_id = $user->id;
         $profile->foto_profil = 'na.png';
         $profile->nama_asli_foto = 'na.png';
+        $profile->waktu_update = date("Y-m-d h:i:s");
         $profile->save();
 
         (new LogActivity())->saveLog('telah menambahkan grup admin baru');
@@ -136,10 +138,11 @@ class MenuGroupAdminController extends Controller
     {
         Auth::user()->hasRole(['super_admin']);
 
-        User::destroy($id);
+//        User::destroy($id);
 
+        User::find($id)->delete();
         (new LogActivity())->saveLog('telah menghapus grup admin '.$id);
 
-        return redirect('/group_Admin/');
+        return redirect('/group_admin/');
     }
 }
