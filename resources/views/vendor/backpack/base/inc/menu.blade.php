@@ -60,7 +60,7 @@
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
-                                        @foreach(\App\Activity::where('user_id', '=', Auth::user()->id)->get() as $activity)
+                                        @foreach(\App\Activity::where('user_id', '=', Auth::user()->id)->orderBy('id', 'desc')->get() as $activity)
                                         <li><!-- Task item -->
                                             <a href="{{url('/activity/'.$activity->id.'/show')}}">
                                                 <h3>
@@ -75,7 +75,7 @@
                                             </a>
                                         </li>
                                     @endforeach
-                                            @foreach(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->get() as $userActivity)
+                                            @foreach(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->orderBy('id', 'desc')->get() as $userActivity)
                                                 <li><!-- Task item -->
                                                     <a href="{{url('/activity/'.$userActivity->activity->id.'/show')}}">
                                                         <h3>
@@ -142,10 +142,10 @@
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-6 text-center">
-                                        <a href="{{url("/profile/team")}}">Team</a>
+                                        <a href="{{url("/profile/team")}}"><i class="fa fa-users"></i> Team</a>
                                     </div>
                                     <div class="col-xs-6 text-center">
-                                        <a href="{{url("/profile/reset_password")}}">Reset Password</a>
+                                        <a href="{{url("/profile/reset_password")}}"><i class="fa fa-refresh"></i> Reset Password</a>
                                     </div>
                                     {{--<div class="col-xs-4 text-center">--}}
                                     {{--<a href="#">Friends</a>--}}
@@ -156,10 +156,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{url("/profile/")}}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{url("/profile/")}}" class="btn btn-default btn-flat"><i class="fa fa-user"></i> Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}" class="btn btn-default btn-flat">Logout</a>
+                                    <a href="{{ url(config('backpack.base.route_prefix', 'admin').'/logout') }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>

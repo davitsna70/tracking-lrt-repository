@@ -27,11 +27,12 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <ul><u><strong>Aktifitas yang di buat oleh Anda</strong></u>
-                                        @foreach(\App\Activity::where('user_id', '=', Auth::user()->id)->get() as $activity)
+                                        @foreach(\App\Activity::where('user_id', '=', Auth::user()->id)->orderBy('id', 'desc')->get() as $activity)
                                             <li><!-- Task item -->
                                                 <a href="{{url('/activity/'.$activity->id.'/show')}}">
                                                     <h5>
-                                                        {{$activity->judul}}
+                                                        <strong>{{$activity->judul}}</strong><br>
+                                                        <div style="color: darkslategray; font-size: 10px">{{$activity->tanggal_mulai}} s/d {{$activity->tanggal_berakhir}} oleh {{$activity->user->name}} | {{$activity->hak_akses}}</div>
                                                         <small class="pull-right">{{$activity->getPersentageProgress()}}%</small>
                                                     </h5>
                                                     <div class="progress xs">
@@ -43,11 +44,12 @@
                                             </li>
                                         @endforeach
                                         <u><strong>Aktifitas Yang di buat oleh pihak lain</strong></u>
-                                        @foreach(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->get() as $userActivity)
+                                        @foreach(\App\UserActivity::where('user_id', '=' , Auth::user()->id)->orderBy('id', 'desc')->get() as $userActivity)
                                             <li><!-- Task item -->
                                                 <a href="{{url('/activity/'.$userActivity->activity->id.'/show')}}">
                                                     <h5>
-                                                        {{$userActivity->activity->judul}}
+                                                        <strong>{{$userActivity->activity->judul}}</strong><br>
+                                                        <div style="color: darkslategray; font-size: 10px">{{$userActivity->activity->tanggal_mulai}} s/d {{$userActivity->activity->tanggal_berakhir}} oleh {{$userActivity->activity->user->name}} | {{$userActivity->activity->hak_akses}}</div>
                                                         <small class="pull-right">{{$userActivity->activity->getPersentageProgress()}}%</small>
                                                     </h5>
                                                     <div class="progress xs">

@@ -63,6 +63,7 @@ class MenuActivityController extends Controller
             ->where('activities.hak_akses', '=', 'private')
             ->select('activities.*')
             ->distinct()
+            ->orderBy('id','desc')
             ->get();
 //        $data = Activity::where('hak_akses','=','private')->first();
 //        dd($data);
@@ -75,6 +76,7 @@ class MenuActivityController extends Controller
             ->where('activities.hak_akses', '=', 'public')
             ->select('activities.*')
             ->distinct()
+            ->orderBy('id','desc')
             ->get();
         return $data;
     }
@@ -88,6 +90,7 @@ class MenuActivityController extends Controller
             ->where('groups.id', '=', Auth::user()->group_id)
             ->select('activities.*')
             ->distinct()
+            ->orderBy('id','desc')
             ->get();
         return $data;
     }

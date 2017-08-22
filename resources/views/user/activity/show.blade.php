@@ -99,7 +99,7 @@
                                 @foreach($activity->list_to_dos as $list_to_do)
                                     <li>{{$list_to_do->judul}}<br>
                                         @if($list_to_do->deskripsi!=null)
-                                            <p>Deskripsi : {{$list_to_do->deskripsi}}</p>
+                                            <p>Deskripsi : <?= nl2br($list_to_do->deskripsi)?></p>
                                         @endif
                                         @if($list_to_do->attachment_list_to_dos!=null)
                                             @foreach($list_to_do->attachment_list_to_dos as $lampiran)
@@ -150,7 +150,7 @@
                         {{$comment->user->name}}
                           <span class="text-muted pull-right">Dibuat Pada : {{$comment->created_at}}</span>
                       </span><!-- /.username -->
-                                            {{$comment->isi}}<br>
+                                            <?= nl2br($comment->isi)?><br>
                                             @forelse($comment->attachment_comments as $lampiran)
                                                 <p>lampiran : <a href="/comment/file/{{basename($lampiran->lampiran)}}">{{$lampiran->nama_asli_lampiran}}</a></p>
                                             @empty

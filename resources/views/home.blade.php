@@ -1,4 +1,4 @@
-@extends('backpack::layout_public')
+@extends('backpack::layout')
 
 @section('header')
     <?php
@@ -106,7 +106,7 @@
                                                 <thead>
                                                 <tr role="row">
                                                     <th rowspan="3">#</th>
-                                                    <th rowspan="3">Activity</th>
+                                                    <th rowspan="3" style="text-align:center">Activity</th>
                                                     <th colspan="{{getNumWeekBetweenMonth((int)$month, 12, $year)}}" style="text-align: center;">{{$year}}</th>
                                                 </tr>
                                                 <tr>
@@ -139,7 +139,7 @@
                                                                 @if(strtotime(date('Y-m-d', strtotime($activity->waktu_selesai))) > strtotime($activity->tanggal_berakhir))
                                                                     <span class="label label-danger">Done After Time</span>
                                                                 @elseif(strtotime(date('Y-m-d', strtotime($activity->waktu_selesai))) == strtotime($activity->tanggal_berakhir))
-                                                                    <span class="label label-info">Done In Time</span>
+                                                                    <span class="label label-info">Done On Time</span>
                                                                 @elseif(strtotime(date('Y-m-d', strtotime($activity->waktu_selesai))) < strtotime($activity->tanggal_berakhir))
                                                                     <span class="label label-success">Done Before Time</span>
                                                                 @endif

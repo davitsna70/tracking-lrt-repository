@@ -110,7 +110,7 @@
                 {{--</div>--}}
 
                 <div class="form-group  " {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} id="checklist">
-                    <label for="checklist">Check List :</label>  <button type="button" id="checklist-more" class="btn btn-primary btn-xs">Add More Checklist</button>
+                    <label for="checklist">Check List :</label>  <button type="button" id="checklist-more" class="btn btn-primary btn-xs" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Add More Checklist</button>
                     <ul>
                         <div id="list-checklist">
                             @foreach($activity->list_to_dos as $list_to_do)
@@ -126,12 +126,12 @@
                                         @endforeach
                                     </ul>
                                 @endif
-                                <a href="/activity/list_to_do/delete/{{$list_to_do->id}}/{{$activity->id}}" class="btn btn-danger btn-xs"> Delete</a>
+                                <a href="/activity/list_to_do/delete/{{$list_to_do->id}}/{{$activity->id}}" class="btn btn-danger btn-xs" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}> Delete</a>
                             @endforeach
                             <div id="checklist-list-0" style="display: none">
                                 <li id="checklist-list-text-0"></li>
-                                <button class="btn btn-warning btn-xs" type="button" id="checklis-button-0" onclick="$('#checklist-0').toggle('fast');$('#checklist-list-0').toggle('fast');">Edit</button>
-                                <button type="button" class="btn btn-danger btn-xs" onclick="$('#checklist-0').remove();$('#checklist-list-0').remove();">Delete</button>
+                                <button class="btn btn-warning btn-xs" type="button" id="checklis-button-0" onclick="$('#checklist-0').toggle('fast');$('#checklist-list-0').toggle('fast');" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Edit</button>
+                                <button type="button" class="btn btn-danger btn-xs" onclick="$('#checklist-0').remove();$('#checklist-list-0').remove();" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Delete</button>
                             </div>
                         </div>
                     </ul>
@@ -150,13 +150,13 @@
                                 {{--<li><label>Attachment Check List</label></li>--}}
                                 <input {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} type="file" class="form-control" name="checklist-attachment-input[]" placeholder="Enter Attachment Check List">
                             </div>
-                            <button class="btn btn-primary btn-xs" type="button" onclick="$('#checklist-list-text-0').text($('#checklist-judul-0').val());$('#checklist-0').toggle('fast');$('#checklist-list-0').toggle('fast');"> Add</button>
+                            <button class="btn btn-primary btn-xs" type="button" onclick="$('#checklist-list-text-0').text($('#checklist-judul-0').val());$('#checklist-0').toggle('fast');$('#checklist-list-0').toggle('fast');" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}> Add</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="member">Members :</label> <button class="btn btn-danger btn-xs inline" type="button" id="clear-member"> Clear Member</button>
+                    <label for="member">Members :</label> <button class="btn btn-danger btn-xs inline" type="button" id="clear-member" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}> Clear Member</button>
                     <ul id="member-list">
                         @foreach($user_activity as $member)
                             <li>{{$member->user->name}}</li>
@@ -169,11 +169,11 @@
                     <div class="ui-widget">
                         {{--<label for="tags">Tags: </label>--}}
                         <input id="add-member-input" class="" {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} style="color: #0c0c0c" placeholder="Enter Member Name">
-                        <button type="button" id="member-button" class="btn btn-primary btn-xs">Add Member</button>
+                        <button type="button" id="member-button" class="btn btn-primary btn-xs" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Add Member</button>
                     </div>
                 </div>
                 <input type="hidden" name="_method" value="PUT">
-                <button type="submit" class="btn btn-primary pull-right" name="create" value="create" id="btn-create-activity">Update Activity</button>
+                <button type="submit" class="btn btn-primary pull-right" name="create" value="create" id="btn-create-activity" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Update Activity</button>
             </form>
             <!-- /.box-body -->
         </div>
@@ -238,18 +238,18 @@
                 function () {
                     $('#input-checklist').append(
                         '<div id="checklist-'+iteratorCheckList+'">\n' +
-                        '                            <input id="checklist-judul-'+iteratorCheckList+'" name="checklist-judul[]" class="form-control" style="color: #0c0c0c" placeholder="Enter CheckList Judul">\n' +
+                        '                            <input id="checklist-judul-'+iteratorCheckList+'" name="checklist-judul[]" class="form-control" style="color: #0c0c0c" placeholder="Enter CheckList Judul" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>\n' +
                         '                            <div id="checklist-deskripsi-teks-'+iteratorCheckList+'" onclick="$(\'#checklist-deskripsi-teks-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-deskripsi-form-'+iteratorCheckList+'\').toggle(\'fast\');">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Add Description</u> </p></div>\n' +
                         '                            <div class="form-group" id="checklist-deskripsi-form-'+iteratorCheckList+'" style="display: none" >\n' +
                         '                                {{--<li><label>Deskripsi Check List</label></li>--}}\n' +
-                        '                                <textarea class="form-control" rows="3" name="checklist-deskripsi-input[]" placeholder="Enter Description Of CheckList"></textarea>\n' +
+                        '                                <textarea class="form-control" rows="3" name="checklist-deskripsi-input[]" placeholder="Enter Description Of CheckList" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}></textarea>\n' +
                         '                            </div>\n' +
                         '                            <div id="checklist-attachment-teks-'+iteratorCheckList+'" onclick="$(\'#checklist-attachment-teks-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-attachment-form-'+iteratorCheckList+'\').toggle(\'fast\');">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Add Attachment</u> </p></div>\n' +
                         '                            <div class="form-group" id="checklist-attachment-form-'+iteratorCheckList+'" style="display: none">\n' +
                         '                                {{--<li><label>Attachment Check List</label></li>--}}\n' +
-                        '                                <input type="file" class="form-control" name="checklist-attachment-input[]" placeholder="Enter Attachment Check List">\n' +
+                        '                                <input type="file" class="form-control" name="checklist-attachment-input[]" placeholder="Enter Attachment Check List" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>\n' +
                         '                            </div>\n' +
-                        '                            <button class="btn btn-primary btn-xs" type="button" onclick="$(\'#checklist-list-text-'+iteratorCheckList+'\').text($(\'#checklist-judul-'+iteratorCheckList+'\').val());$(\'#checklist-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-list-'+iteratorCheckList+'\').toggle(\'fast\');"> Add</button>\n' +
+                        '                            <button class="btn btn-primary btn-xs" type="button" onclick="$(\'#checklist-list-text-'+iteratorCheckList+'\').text($(\'#checklist-judul-'+iteratorCheckList+'\').val());$(\'#checklist-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-list-'+iteratorCheckList+'\').toggle(\'fast\');" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}> Add</button>\n' +
                         '                        </div>'
                     );
                     $('#list-checklist').append(

@@ -1,6 +1,6 @@
 @if (Auth::check())
   <!-- Left side column. contains the sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="background-image:url('{{url('/storage/batik-texture-background.jpg')}}')">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -31,22 +31,22 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('data/user/')}}"><i class="fa fa-circle-o"></i> Users</a></li>
-              <li><a href="{{url('data/profile/')}}"><i class="fa fa-circle-o"></i> Profiles</a></li>
-              <li><a href="{{url('data/user_activity')}}"><i class="fa fa-circle-o"></i> User Activities</a></li>
-              <li><a href="{{url('data/activity/')}}"><i class="fa fa-circle-o"></i> Activities</a></li>
-              <li><a href="{{url('data/attachment_activity/')}}"><i class="fa fa-circle-o"></i> Attachment Activities</a></li>
-              <li><a href="{{url('data/comment/')}}"><i class="fa fa-circle-o"></i> Comments</a></li>
-              <li><a href="{{url('data/attachment_comment/')}}"><i class="fa fa-circle-o"></i> Attachment Comments</a></li>
-              <li><a href="{{url('data/list_to_do/')}}"><i class="fa fa-circle-o"></i> Lists To Do</a></li>
-              <li><a href="{{url('data/attachment_list_to_do/')}}"><i class="fa fa-circle-o"></i> Attachment Lists To Do</a></li>
-              <li><a href="{{url('data/archive/')}}"><i class="fa fa-circle-o"></i> Archives</a></li>
-              <li><a href="{{url('data/group/')}}"><i class="fa fa-circle-o"></i> Groups</a></li>
+              <li><a href="{{url('data/user/')}}"><i class="fa fa-book"></i> Users</a></li>
+              <li><a href="{{url('data/profile/')}}"><i class="fa fa-book"></i> Profiles</a></li>
+              <li><a href="{{url('data/user_activity')}}"><i class="fa fa-book"></i> User Activities</a></li>
+              <li><a href="{{url('data/activity/')}}"><i class="fa fa-book"></i> Activities</a></li>
+              <li><a href="{{url('data/attachment_activity/')}}"><i class="fa fa-book"></i> Attachment Activities</a></li>
+              <li><a href="{{url('data/comment/')}}"><i class="fa fa-book"></i> Comments</a></li>
+              <li><a href="{{url('data/attachment_comment/')}}"><i class="fa fa-book"></i> Attachment Comments</a></li>
+              <li><a href="{{url('data/list_to_do/')}}"><i class="fa fa-book"></i> Lists To Do</a></li>
+              <li><a href="{{url('data/attachment_list_to_do/')}}"><i class="fa fa-book"></i> Attachment Lists To Do</a></li>
+              <li><a href="{{url('data/archive/')}}"><i class="fa fa-book"></i> Archives</a></li>
+              <li><a href="{{url('data/group/')}}"><i class="fa fa-book"></i> Groups</a></li>
               {{--<li><a href="{{url('data/message/')}}"><i class="fa fa-circle-o"></i> Messages</a></li>--}}
               {{--<li><a href="{{url('data/notification/')}}"><i class="fa fa-circle-o"></i> Notifications</a></li>--}}
-              <li><a href="{{url('data/log_activity')}}"><i class="fa fa-circle-o"></i> Log Activities</a></li>
+              <li><a href="{{url('data/log_activity')}}"><i class="fa fa-book"></i> Log Activities</a></li>
             </ul>
-          <li><a href="{{url('data/group/')}}"><i class="fa fa-cubes"></i> Groups</a></li>
+          <li><a href="{{url('data/group')}}"><i class="fa fa-cubes"></i> <span>Groups</span></a></li>
           <li class="treeview">
             <a href="#">
               <i class="fa fa-share"></i> <span>Member</span>
@@ -71,10 +71,10 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-circle-o"></i> How To Use</a></li>
-              <li><a href="{{url('/help/information')}}"><i class="fa fa-circle-o"></i> Information</a></li>
-              <li><a href="{{url('/help/about')}}"><i class="fa fa-circle-o"></i> About</a></li>
-              <li><a href="{{url('/help/contact')}}"><i class="fa fa-circle-o"></i> Contact</a></li>
+              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>
+              <li><a href="{{url('/help/information')}}"><i class="fa fa-question-circle"></i> Information</a></li>
+              <li><a href="{{url('/help/about')}}"><i class="fa fa-question-circle"></i> About</a></li>
+              <li><a href="{{url('/help/contact')}}"><i class="fa fa-question-circle"></i> Contact</a></li>
             </ul>
           </li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/log') }}"><i class="fa fa-terminal"></i> <span>Logs</span></a></li>
@@ -98,10 +98,10 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-circle-o"></i> How To Use</a></li>
-              <li><a href="{{url('/help/information')}}"><i class="fa fa-circle-o"></i> Information</a></li>
-              <li><a href="{{url('/help/about')}}"><i class="fa fa-circle-o"></i> About</a></li>
-              <li><a href="{{url('/help/contact')}}"><i class="fa fa-circle-o"></i> Contact</a></li>
+              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>
+              <li><a href="{{url('/help/information')}}"><i class="fa fa-question-circle"></i> Information</a></li>
+              <li><a href="{{url('/help/about')}}"><i class="fa fa-question-circle"></i> About</a></li>
+              <li><a href="{{url('/help/contact')}}"><i class="fa fa-question-circle"></i> Contact</a></li>
             </ul>
           </li>
 
@@ -123,10 +123,10 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-circle-o"></i> How To Use</a></li>
-              <li><a href="{{url('/help/information')}}"><i class="fa fa-circle-o"></i> Information</a></li>
-              <li><a href="{{url('/help/about')}}"><i class="fa fa-circle-o"></i> About</a></li>
-              <li><a href="{{url('/help/contact')}}"><i class="fa fa-circle-o"></i> Contact</a></li>
+              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>
+              <li><a href="{{url('/help/information')}}"><i class="fa fa-question-circle"></i> Information</a></li>
+              <li><a href="{{url('/help/about')}}"><i class="fa fa-question-circle"></i> About</a></li>
+              <li><a href="{{url('/help/contact')}}"><i class="fa fa-question-circle"></i> Contact</a></li>
             </ul>
           </li>
 

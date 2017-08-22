@@ -53,6 +53,7 @@ class MenuTimelineController extends Controller
             ->whereYear('tanggal_mulai', '=', $year)
             ->orWhere('hak_akses', '=', 'public')
             ->whereYear('tanggal_berakhir', '=', $year)
+            ->orderBy('tanggal_mulai')
             ->get();
 
         return view('user.timeline.timeline')

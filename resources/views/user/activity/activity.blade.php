@@ -73,7 +73,7 @@
                             <div class="tab-pane active" id="tab_1">
                                 @forelse($activities as $activity)
                                     @if($activity->status === "plan")
-                                        <h3><b>Activities : {{$activity->judul}}</b></h3>
+                                        <h3><b>Activity : {{$activity->judul}}</b></h3>
                                     @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
                                             <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
@@ -124,7 +124,7 @@
                             <div class="tab-pane" id="tab_2">
                                 @forelse($activities as $activity)
                                     @if($activity->status === "ongoing")
-                                        <h3><b>Activities : {{$activity->judul}}</b></h3>
+                                        <h3><b>Activity : {{$activity->judul}}</b></h3>
                                         @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
                                             <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
@@ -174,7 +174,7 @@
                             <div class="tab-pane" id="tab_3">
                                 @forelse($activities as $activity)
                                     @if($activity->status === "late")
-                                        <h3><b>Activities : {{$activity->judul}}</b></h3>
+                                        <h3><b>Activity : {{$activity->judul}}</b></h3>
                                         @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
                                             <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
@@ -275,7 +275,7 @@
                             <div class="tab-pane" id="tab_5">
                                 @forelse($activities as $activity)
                                     @if($activity->status === "done")
-                                        <h3><b>Activities : {{$activity->judul}}</b></h3>
+                                        <h3><b>Activity : {{$activity->judul}}</b></h3>
                                         @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
                                             <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else

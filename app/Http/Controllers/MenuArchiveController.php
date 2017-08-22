@@ -16,7 +16,7 @@ class MenuArchiveController extends Controller
      */
     public function archive()
     {
-        $archives = Archive::where('user_id', '=', Auth::user()->id)->get();
+        $archives = Archive::where('user_id', '=', Auth::user()->id)->orderBy('id', 'desc')->get();
 //        dd($archives);
         return view('user.archive.archive')
             ->with('archives', $archives);

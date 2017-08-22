@@ -28,10 +28,10 @@
                                 <div class="col-sm-12">
                                     @foreach($activities as $activity)
                                         @foreach($activity->list_to_dos as $list_to_do)
-                                            <li title="{{$activity->judul.' dari '.$activity->tanggal_mulai.'s/d'.$activity->tanggal_berakhir}}">{{$list_to_do->judul}}<br>
+                                            <li title="{{$activity->judul.' dari '.$activity->tanggal_mulai.' s/d '.$activity->tanggal_berakhir}}"><strong>{{$list_to_do->judul}}</strong><br>
                                                 <a href="{{url('/activity/'.$activity->id.'/show')}}">{{$activity->judul}}</a><br>
                                                 @if($list_to_do->deskripsi!=null)
-                                                    <p>Deskripsi : {{$list_to_do->deskripsi}}</p>
+                                                    <p>Deskripsi : <?= nl2br($list_to_do->deskripsi) ?></p>
                                                 @endif
                                                 @if($list_to_do->attachment_list_to_dos!=null)
                                                     @foreach($list_to_do->attachment_list_to_dos as $lampiran)
