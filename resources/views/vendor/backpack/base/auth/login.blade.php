@@ -41,23 +41,29 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ trans('backpack::base.login') }}
+                                </button>
+                                &nbsp;&nbsp;
+                                <div class="checkbox inline">
                                     <label>
                                         <input type="checkbox" name="remember"> {{ trans('backpack::base.remember_me') }}
                                     </label>
                                 </div>
+                                {{--                                <a class="btn btn-link" href="{{ url(config('backpack.base.route_prefix', 'admin').'/password/reset') }}">{{ trans('backpack::base.forgot_your_password') }}</a>--}}
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ trans('backpack::base.login') }}
-                                </button>
+                        {{--<div class="form-group ">--}}
+                            {{--<div class="col-md-6 col-md-offset-3">--}}
+                                {{--<div class="checkbox">--}}
+                                    {{--<label>--}}
+                                        {{--<input type="checkbox" name="remember"> {{ trans('backpack::base.remember_me') }}--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                                <a class="btn btn-link" href="{{ url(config('backpack.base.route_prefix', 'admin').'/password/reset') }}">{{ trans('backpack::base.forgot_your_password') }}</a>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

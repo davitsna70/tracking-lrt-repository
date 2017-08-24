@@ -41,6 +41,7 @@ class MenuActivityController extends Controller
     {
         $activities = $this->getPublicActivities();
 //        dd($this->getPrivateActivities());
+//        dd($activities);
         return view('user.activity.activity')
             ->with('activities', $activities);
     }
@@ -225,7 +226,7 @@ class MenuActivityController extends Controller
                 ->where('group_id', '=', Auth::user()->group->id)
                 ->get();
         }
-        else{
+        elseif(Auth::user()->role == 'super_admin'){
             $items = User::where('role','=','group_admin')
                 ->where('name', 'like', '%'.$term.'%')
                 ->orWhere('role','=','member_group')
@@ -233,6 +234,8 @@ class MenuActivityController extends Controller
 //                ->orWhere('role','=', 'viewer')
 //                ->where('name', 'like', '%'.$term.'%')
                 ->get();
+//            $items = User::where('name', 'like', '%'.$term.'%')
+//                ->get();
         }
 
         if(count($items)==0){

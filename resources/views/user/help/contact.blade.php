@@ -31,7 +31,7 @@
 
                                     <p>
                                         Kementrian Koordinator Bidang Kemaritiman <br>
-                                        Gedung BPPT 1 Lantai 4 <br>
+                                        Gedung BPPT 1 Lantai 3 <br>
                                         Jalan M.H Thamrin No.8 Menteng <br>
                                         RT.2/RW.1, Kebon Sirih <br>
                                         Menteng, Kota Jakarta Pusat <br>

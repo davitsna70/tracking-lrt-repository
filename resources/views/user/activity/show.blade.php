@@ -52,33 +52,33 @@
                                     <table class="table table-bordered table-striped">
                                         <tr>
                                             <td>Dikirim pada  </td>
-                                            <td>: {{$activity->created_at}}</td>
+                                            <td> {{$activity->created_at}}</td>
                                         </tr>
                                         <tr>
                                             <td>Batas Waktu  </td>
-                                            <td>: {{$activity->tanggal_mulai}} s/d {{$activity->tanggal_berakhir}}</td>
+                                            <td> {{$activity->tanggal_mulai}} s/d {{$activity->tanggal_berakhir}}</td>
                                         </tr>
                                         <tr>
                                             <td>Hak Akses </td>
-                                            <td>: {{$activity->hak_akses}}</td>
+                                            <td> {{ucfirst($activity->hak_akses)}}</td>
                                         </tr>
                                         <tr>
                                             <td>Status </td>
-                                            <td>: {{$activity->status}}</td>
+                                            <td> {{ucwords($activity->status)}}</td>
                                         </tr>
                                         <tr>
                                             <td>Waktu Selesai  </td>
-                                            <td>: {{$activity->waktu_selesai}}</td>
+                                            <td> {{$activity->waktu_selesai}}</td>
                                         </tr>
                                         <tr>
                                             <td>Deskripsi </td>
-                                            <td>: <?= nl2br( $activity->deskripsi)?></td>
+                                            <td> <?= ucfirst(nl2br( $activity->deskripsi))?></td>
                                         </tr>
                                         @if($activity->attachment_activities!=null)
                                             @foreach($activity->attachment_activities as $lampiran)
                                                 <tr>
                                                     <td>Lampiran Aktivitas </td>
-                                                    <td>: <a href="/activity/file/{{basename($lampiran->lampiran)}}">{{$lampiran->nama_asli_lampiran}}</a></td>
+                                                    <td> <a href="/activity/file/{{basename($lampiran->lampiran)}}">{{$lampiran->nama_asli_lampiran}}</a></td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -97,9 +97,9 @@
                             <strong><p>Checklist : </p></strong>
                             <ul>
                                 @foreach($activity->list_to_dos as $list_to_do)
-                                    <li>{{$list_to_do->judul}}<br>
+                                    <li>{{ucwords($list_to_do->judul)}}<br>
                                         @if($list_to_do->deskripsi!=null)
-                                            <p>Deskripsi : <?= nl2br($list_to_do->deskripsi)?></p>
+                                            <p>Deskripsi : <?= ucfirst(nl2br($list_to_do->deskripsi))?></p>
                                         @endif
                                         @if($list_to_do->attachment_list_to_dos!=null)
                                             @foreach($list_to_do->attachment_list_to_dos as $lampiran)
@@ -135,7 +135,7 @@
 
                         <div class="box container">
                             <br>
-                            <strong><p>Comments</p></strong>
+                            <strong><p>Comments ({{count($comments)}})</p></strong>
                             <hr>
                             @forelse($comments as $comment)
 

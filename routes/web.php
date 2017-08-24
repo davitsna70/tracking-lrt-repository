@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/home', 'PublicController@timeline');
-Route::get('/home/date', 'PublicController@timelineWithData');
-Route::get('/', 'PublicController@timeline');
+Route::get('/index', 'PublicController@index');
+
+Route::get('/home', 'PublicController@index');
+Route::get('/home/date', 'PublicController@indexWithData');
+Route::get('/', 'PublicController@index');
 
 Route::get('/profile/photo/{filename}', 'FileController@getProfilePhoto')->middleware('auth');
 Route::get('/list_to_do/file/{filename}', 'FileController@getListToDoFile')->middleware('auth');

@@ -91,7 +91,7 @@ class MenuProfileController extends Controller
         $profile->waktu_update = date("Y-m-d h:i:s");
         if ($request->hasFile('foto_profil')){
             $profile->nama_asli_foto = $request->file('foto_profil')->getClientOriginalName();
-            $profile = $request->file('foto_profil')->store('public/profile');
+            $profile->foto_profil = $request->file('foto_profil')->store('public/profile');
         }
         $profile->save();
 

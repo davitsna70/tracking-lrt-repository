@@ -118,12 +118,12 @@
                             <div class="form-group">
                                 <input id="checklist-judul-0" name="checklist-judul[]" class="form-control" style="color: #0c0c0c" placeholder="Enter CheckList Judul">
                             </div>
-                            <div id="checklist-deskripsi-teks-0" onclick="$('#checklist-deskripsi-teks-0').toggle('fast');$('#checklist-deskripsi-form-0').toggle('fast');">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Add Description</u> </p></div>
+                            <div id="checklist-deskripsi-teks-0" onclick="$('#checklist-deskripsi-teks-0').toggle('fast');$('#checklist-deskripsi-form-0').toggle('fast');" style="font-size: 12px">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Tambah Deskripsi</u> </p></div>
                             <div class="form-group" id="checklist-deskripsi-form-0" style="display: none" >
                                 {{--<li><label>Deskripsi Check List</label></li>--}}
                                 <textarea class="form-control" rows="3" name="checklist-deskripsi-input[]" placeholder="Enter Description Of CheckList"></textarea>
                             </div>
-                            <div id="checklist-attachment-teks-0" onclick="$('#checklist-attachment-teks-0').toggle('fast');$('#checklist-attachment-form-0').toggle('fast');">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Add Attachment</u> </p></div>
+                            <div id="checklist-attachment-teks-0" onclick="$('#checklist-attachment-teks-0').toggle('fast');$('#checklist-attachment-form-0').toggle('fast');" style="font-size: 12px">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Tambah Lampiran</u> </p></div>
                             <div class="form-group" id="checklist-attachment-form-0" style="display: none">
                                 {{--<li><label>Attachment Check List</label></li>--}}
                                 <input type="file" class="form-control" name="checklist-attachment-input[]" placeholder="Enter Attachment Check List">
@@ -214,12 +214,12 @@
                     $('#input-checklist').append(
                         '<div id="checklist-'+iteratorCheckList+'">\n' +
                         '                            <input id="checklist-judul-'+iteratorCheckList+'" name="checklist-judul[]" class="form-control" style="color: #0c0c0c" placeholder="Enter CheckList Judul">\n' +
-                        '                            <div id="checklist-deskripsi-teks-'+iteratorCheckList+'" onclick="$(\'#checklist-deskripsi-teks-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-deskripsi-form-'+iteratorCheckList+'\').toggle(\'fast\');">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Add Description</u> </p></div>\n' +
+                        '                            <div id="checklist-deskripsi-teks-'+iteratorCheckList+'" onclick="$(\'#checklist-deskripsi-teks-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-deskripsi-form-'+iteratorCheckList+'\').toggle(\'fast\');">&emsp;<span class="fa fa-plus inline" style="font-size: 12px"></span><p class="inline"><u>Tambah Deskripsi</u> </p></div>\n' +
                         '                            <div class="form-group" id="checklist-deskripsi-form-'+iteratorCheckList+'" style="display: none" >\n' +
                         '                                {{--<li><label>Deskripsi Check List</label></li>--}}\n' +
                         '                                <textarea class="form-control" rows="3" name="checklist-deskripsi-input[]" placeholder="Enter Description Of CheckList"></textarea>\n' +
                         '                            </div>\n' +
-                        '                            <div id="checklist-attachment-teks-'+iteratorCheckList+'" onclick="$(\'#checklist-attachment-teks-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-attachment-form-'+iteratorCheckList+'\').toggle(\'fast\');">&emsp;<span class="fa fa-plus inline"></span><p class="inline"><u>Add Attachment</u> </p></div>\n' +
+                        '                            <div id="checklist-attachment-teks-'+iteratorCheckList+'" onclick="$(\'#checklist-attachment-teks-'+iteratorCheckList+'\').toggle(\'fast\');$(\'#checklist-attachment-form-'+iteratorCheckList+'\').toggle(\'fast\');">&emsp;<span class="fa fa-plus inline" style="font-size: 12px"></span><p class="inline"><u>Tambah Lampiran</u> </p></div>\n' +
                         '                            <div class="form-group" id="checklist-attachment-form-'+iteratorCheckList+'" style="display: none">\n' +
                         '                                {{--<li><label>Attachment Check List</label></li>--}}\n' +
                         '                                <input type="file" class="form-control" name="checklist-attachment-input[]" placeholder="Enter Attachment Check List">\n' +
@@ -241,6 +241,23 @@
                 function () {
                     $('#member-list').html("");
                     $('#member-hide-input').html("");
+                }
+            ),
+            $('#datepicker-2').on('focus',
+                function () {
+                    var date1 = $('#datepicker-1').val();
+                    if(date1 == ""){
+                        $('#datepicker-1').val($.datepicker.formatDate('mm/dd/yy', new Date()));
+                    }
+                }
+            ),
+            $('#datepicker-2').on('change',
+                function () {
+                    if(this.val()!="") {
+                        if (new Date($('#datepicker-1').val()).getTime() > new Date(this.val()).getTime()) {
+                            this.val('');
+                        }
+                    }
                 }
             )
         );

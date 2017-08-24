@@ -12,6 +12,9 @@ class FileController extends Controller
 {
     public function getProfilePhoto($filename){
         $name = Profile::where('foto_profil', 'like', '%'.$filename.'%')->get()->first()->nama_asli_foto;
+        if($name==null){
+            return response()->download(Storage_path('app/public/profile/'."na.png"),"na.png",[],'inline');
+        }
         return response()->download(Storage_path('app/public/profile/'.$filename),$name,[],'inline');
     }
 

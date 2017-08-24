@@ -28,7 +28,7 @@
                                 <div class="col-sm-12">
                                     <h3>About</h3>
                                     <p>
-                                        Sistem ini di bangun untuk keperluan pembangunan LRT.
+                                        Sistem ini di bangun untuk keperluan pembangunan LRT. Mengatur koordinasi antar bagian bidang yang terkait untuk mencapai suatu keselarasan pekerjaan dengan timeline yang di aturkan sebelumnya, agar setiap pekerjaan yang terkait daat di lihat oleh public dan dapat di track secara baik.
                                     </p>
                                 </div>
                             </div>
