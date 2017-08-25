@@ -166,7 +166,7 @@
                                 <hr>
                             @endforelse
 
-                            <form action="/activity/comment/{{$activity->id}}" method="post" enctype="multipart/form-data">
+                            <form action="{{url("/activity/comment/".$activity->id)}}" method="post" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div class="form-group {{$errors->has('komentar')?'has-error':''}}">
                                     <label for="komentar">Komentar</label>

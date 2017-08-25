@@ -25,7 +25,7 @@
                     <div class="col-sm-9">
                         <div id="example1_filter" class="dataTables_filter">
                             <label>Activity in access right :
-                                <form action="/activity/access_right" method="get" style="display: inline-block">
+                                <form action="{{url("/activity/access_right")}}" method="get" style="display: inline-block">
                                     {{--{{csrf_field()}}--}}
                                     <div class="form-group">
                                         <select class="form-control" name="hak_akses">

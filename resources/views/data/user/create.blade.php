@@ -22,7 +22,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form role="form" action="/data/user/save/" method="post">
+            <form role="form" action="{{url("/data/user/save/")}}" method="post">
                 {{csrf_field()}}
 
                 <div class="form-group">
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label>Role</label>
                     <select class="form-control" name="role">
-                        <option value="viewer">Viewer</option>
+                        {{--<option value="viewer">Viewer</option>--}}
                         <option value="group_admin">Group Administrator</option>
                         <option value="member_group">Member</option>
                         <option value="super_admin">Super Administrator</option>

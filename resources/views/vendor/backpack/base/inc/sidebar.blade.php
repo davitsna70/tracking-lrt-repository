@@ -1,6 +1,6 @@
 @if (Auth::check())
   <!-- Left side column. contains the sidebar -->
-  <aside class="main-sidebar" style="background-image:url('{{url('/storage/batik-texture-background.jpg')}}')">
+  <aside class="main-sidebar" style="background-image:url('{{ asset('images/batik-texture-background.jpg')}}')">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->

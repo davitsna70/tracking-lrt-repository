@@ -65,7 +65,7 @@
                                 <td>Action</td>
                                 <td>
                                     <a href="/member_group/{{$user->id}}/edit" style="display:inline-block;"><button class="btn btn-sm btn-warning"><span class="fa fa-edit"></span> Edit</button></a>
-                                    <form action="/member_group/{{$user->id}}/delete" method="post" style="display:inline-block;">
+                                    <form action="{{url("/member_group/".$user->id."/delete")}}" method="post" style="display:inline-block;">
                                         {{csrf_field()}}
                                         <button class="btn btn-sm btn-danger"><span class="fa fa-close"></span> Delete</button>
                                         <input type="hidden" name="_method" value="DELETE">

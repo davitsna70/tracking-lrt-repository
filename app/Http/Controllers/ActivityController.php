@@ -54,6 +54,7 @@ class ActivityController extends Controller
         $activity->tanggal_mulai = date("Y-m-d", strtotime($request->tanggal_mulai));
         $activity->tanggal_berakhir = date("Y-m-d", strtotime($request->tanggal_berakhir));
         $activity->status = $request->status;
+        $activity->waktu_selesai = date("Y-m-d h:m:s", strtotime($request->waktu_selesai));
 
         $activity->save();
 
@@ -111,6 +112,7 @@ class ActivityController extends Controller
         $activity->tanggal_mulai = date("Y-m-d", strtotime($request->tanggal_mulai));
         $activity->tanggal_berakhir = date("Y-m-d", strtotime($request->tanggal_berakhir));
         $activity->status = $request->status;
+        $activity->waktu_selesai = date("Y-m-d h:m:s", strtotime($request->waktu_selesai));
 
         $activity->save();
 

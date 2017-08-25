@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             @endif
-            <form role="form" action="/activity/{{$activity->id}}/save_change" method="post" enctype="multipart/form-data">
+            <form role="form" action="{{url("/activity".$activity->id."/save_change")}}" method="post" enctype="multipart/form-data">
 
             {{csrf_field()}}
             <!-- text input -->

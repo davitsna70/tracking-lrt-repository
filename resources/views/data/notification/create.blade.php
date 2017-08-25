@@ -22,7 +22,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form role="form" action="/data/notification/save/" method="post">
+            <form role="form" action="{{url("/data/notification/save/")}}" method="post">
                 {{csrf_field()}}
 
                 <div class="form-group">

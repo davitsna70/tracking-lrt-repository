@@ -47,7 +47,7 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="{{url('/storage/LRT.png')}}">
+    <link rel="icon" href="{{ asset('images/LRT.png') }}">
     <title>Light Rail Transit</title>
     <link rel="stylesheet" href="{{ asset('onepage') }}/css/components.css">
     <link rel="stylesheet" href="{{ asset('onepage') }}/css/responsee.css">
@@ -117,7 +117,12 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
     <nav style="background-color: midnightblue; opacity: 10;">
         <div class="line">
             <div class="s-12 l-2">
-                <img src="{{url('/storage/LRT.png')}}" alt="Logo" style="height: 50px; width: 50px;" class="img-circle inline"><p class="logo inline" style="font-size: 16px">Light Rail Transit</p>
+                <a href="{{url("/home")}}">
+                    <img src="{{ asset('images/LRT.png') }}" alt="Logo" style="height: 50px; width: 50px;" class="img-circle inline">
+                    <p class="logo inline" style="font-size: 16px">
+                        Light Rail Transit
+                    </p>
+                </a>
             </div>
             <div class="top-nav s-12 l-10">
                 <p class="nav-text">Custom menu text</p>
@@ -130,11 +135,10 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
                     {{--<li><a href="#services">Services</a></li>--}}
                     {{--<li><a href="#contact">Contact</a></li>--}}
                     @if(Auth::check())
-                        <li class=""><a href="{{url('/dashboard')}}">Dashboard</a></li>
-                        <li class=""><a href="{{url('/logout')}}">Sign Out</a></li>
+                        <li class="" id="dashboard"><a href="#">Dashboard</a></li>
+                        <li class="" id="logout"><a href="#">Sign Out</a></li>
                     @else
-                        <li><a href="{{url('/login')}}"> {{ trans('backpack::base.login') }}</a></li>
-                        {{--<li><a href="#our-work">Our Work</a></li>--}}
+                        <li class="" id="login"><a href="#"> {{ trans('backpack::base.login') }}</a></li>
                     @endif
                 </ul>
             </div>
@@ -218,8 +222,11 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
                 <div class="s-12 m-6 l-6">
                     <div class="project-progress">
                         <h3>Project Progress : {{printf("%.1f",100*$numAllListToDoDone/$numAllListToDo)}}%</h3>
-                        <div class="progress xs">
-                            <div class="progress-bar progress-bar-aqua" style="width: {{100*$numAllListToDoDone/$numAllListToDo}}%" role="progressbar" aria-valuenow="{{100*$numAllListToDoDone/$numAllListToDo}}" aria-valuemin="0" aria-valuemax="100">
+                        @if(100*$numAllListToDoDone/$numAllListToDo==100)
+                            <h4 style="background-color: greenyellow">Complete...</h4>
+                        @endif
+                        <div class="progress ">
+                            <div class="progress-bar progress-bar-striped active progress-bar-aqua" style="width: {{100*$numAllListToDoDone/$numAllListToDo}}%" role="progressbar" aria-valuenow="{{100*$numAllListToDoDone/$numAllListToDo}}" aria-valuemin="0" aria-valuemax="100">
                                 <span class="sr-only">{{100*$numAllListToDoDone/$numAllListToDo}}% Complete</span>
                             </div>
                         </div>
@@ -385,7 +392,7 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
                                                         {{--{{$sumDateAll}}--}}
                                                         Time Progress : {{round(100*$sumDateToday/$sumDateAll)}}%
                                                         <div class="progress xs">
-                                                            <div class="progress-bar progress-bar-aqua" style="width: {{100*$sumDateToday/$sumDateAll}}%" role="progressbar" aria-valuenow="{{100*$sumDateToday/$sumDateAll}}" aria-valuemin="0" aria-valuemax="100">
+                                                            <div class="progress-bar progress-bar-striped active  progress-bar-aqua" style="width: {{100*$sumDateToday/$sumDateAll}}%" role="progressbar" aria-valuenow="{{100*$sumDateToday/$sumDateAll}}" aria-valuemin="0" aria-valuemax="100">
                                                                 <span class="sr-only">{{100*$sumDateToday/$sumDateAll}}% Complete</span>
                                                             </div>
                                                         </div>
@@ -395,7 +402,7 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
                                                     <td colspan="{{getNumWeekBetweenMonth((int)$month, 12, $year)}}">
                                                         Activity Progress : {{round($activity->getPersentageProgress())}}%
                                                         <div class="progress xs">
-                                                            <div class="progress-bar progress-bar-aqua" style="width: {{$activity->getPersentageProgress()}}%" role="progressbar" aria-valuenow="{{$activity->getPersentageProgress()}}" aria-valuemin="0" aria-valuemax="100">
+                                                            <div class="progress-bar progress-bar-striped active progress-bar-aqua" style="width: {{$activity->getPersentageProgress()}}%" role="progressbar" aria-valuenow="{{$activity->getPersentageProgress()}}" aria-valuemin="0" aria-valuemax="100">
                                                                 <span class="sr-only">{{$activity->getPersentageProgress()}}% Complete</span>
                                                             </div>
                                                         </div>
@@ -471,12 +478,13 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
 @endif
 
 <!-- MAP -->
-    <div id="map-block">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1247814.3661917313!2d16.569872019090596!3d48.23131953825178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8cbf758ecb9f%3A0xddeb1d26bce5eccf!2sGallayova+2150%2F19%2C+841+02+D%C3%BAbravka!5e0!3m2!1ssk!2ssk!4v1440344568394" width="100%" height="450" frameborder="0" style="border:0"></iframe>
-    </div>
+    {{--<div id="map-block">--}}
+        {{--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1247814.3661917313!2d16.569872019090596!3d48.23131953825178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8cbf758ecb9f%3A0xddeb1d26bce5eccf!2sGallayova+2150%2F19%2C+841+02+D%C3%BAbravka!5e0!3m2!1ssk!2ssk!4v1440344568394" width="100%" height="450" frameborder="0" style="border:0"></iframe>--}}
+    {{--</div>--}}
+    <div id="googleMap" style="width:100%;height:400px;"></div>
 </section>
 <!-- FOOTER -->
-<footer>
+<footer style="background-color: #1c2d3f;" id="contact">
     <div class="line">
         <div class="s-12 l-6">
             <div id="text-10" class="widget widget_text">
@@ -500,6 +508,19 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
     </div>
 </footer>
 <script type="text/javascript" src="{{ asset('onepage') }}/owl-carousel/owl.carousel.js"></script>
+
+<script>
+    function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(-6.184995,106.822756),
+            zoom:18,
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCns1RnL_QiTsHqZidgrscpBYzETOerdsU&callback=myMap"></script>
+
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         var theme_slider = $("#owl-demo");
@@ -560,6 +581,24 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
             document.getElementById("demo").innerHTML = "EXPIRED";
         }
     }, 1000);
+    
+    $('#login').on('click',
+        function () {
+            window.location.href = "{{url('/login')}}";
+        }
+    );
+
+    $('#dashboard').on('click',
+        function () {
+            window.location.href = "{{url('/dashboard')}}";
+        }
+    );
+
+    $('#logout').on('click',
+        function () {
+            window.location.href = "{{url('/logout')}}";
+        }
+    );
 </script>
 </body>
 </html>

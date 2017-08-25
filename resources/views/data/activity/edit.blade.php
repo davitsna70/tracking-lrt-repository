@@ -22,7 +22,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form role="form" action="/data/activity/{{$activity->id}}/update/" method="post">
+            <form role="form" action="{{url("/data/activity/".$activity->id."/update/")}}" method="post">
                 {{csrf_field()}}
                 <div class="form-group">
                     <label>User</label>
@@ -76,6 +76,15 @@
                     <!-- /.input group -->
                 </div>
 
+                <!--Waktu Selesai-->
+                <label>Waktu Selesai:</label>
+                <div class="input-group date" >
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input type="text" class="form-control pull-right" id="datepicker-3" name="waktu_selesai" value="{{$activity->waktu_selesai}}">
+                </div>
+
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status" >
@@ -104,6 +113,10 @@
             });
 
             $('#datepicker-2').datepicker({
+                autoclose: true
+            });
+
+            $('#datepicker-3').datepicker({
                 autoclose: true
             });
 

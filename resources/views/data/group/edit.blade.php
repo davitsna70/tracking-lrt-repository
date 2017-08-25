@@ -22,7 +22,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form role="form" action="/data/group/{{$group->id}}/update/" method="post">
+            <form role="form" action="{{url("/data/group/".$group->id."/update/")}}" method="post">
                 {{csrf_field()}}
 
                 <div class="form-group">

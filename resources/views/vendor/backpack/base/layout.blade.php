@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{url('/storage/LRT.png')}}">
+    <link rel="icon" href="{{ asset('images/LRT.png') }}">
 
     {{-- Encrypted CSRF token for Laravel, in order for Ajax requests to work --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -66,25 +66,25 @@
     <![endif]-->
 </head>
 {{--style="background-image:url('{{url('/storage/batik-bg.jpg')}}')"--}}
-{{--style="background-image:url('{{url('/storage/batik-overlay.jpg')}}'); "--}}
+{{--style="background-image:url('{{ asset('images/batik-overlay.jpg')}}'); "--}}
 <body class="hold-transition {{ config('backpack.base.skin') }} layout-boxed sidebar-mini" >
 {{--<div class="container">--}}
 <!-- Site wrapper -->
 <div class="wrapper">
     {{--<div style="background-color: #9d9d9d">--}}
-        {{--<img src="{{url('/storage/LRT.png')}}" alt="" class="img-circle" width="70" height="70">--}}
+        {{--<img src="{{ asset('images/LRT.png') }}" alt="" class="img-circle" width="70" height="70">--}}
     {{--</div>--}}
     <header class="main-header" >
         <!-- Logo -->
         @if(Auth::check())
             <a href="{{ url('/timeline') }}" class="logo" >
                 @else
-                    <a href="{{ url('') }}" class="logo" >
+                    <a href="{{ url('/home') }}" class="logo" >
                     @endif
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                        <span class="logo-mini"><img src="{{url('/storage/LRT.png')}}" alt="Logo" class="img-circle" width="40px" height="40px">{!! config('backpack.base.logo_mini') !!}</span>
+                        <span class="logo-mini"><img src="{{ asset('images/LRT.png') }}" alt="Logo" class="img-circle" width="40px" height="40px">{!! config('backpack.base.logo_mini') !!}</span>
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg"> <img src="{{url('/storage/LRT.png')}}" alt="Logo" class="img-circle" width="40px" height="40px">{!! config('backpack.base.logo_lg') !!}</span>
+                        <span class="logo-lg"> <img src="{{ asset('images/LRT.png') }}" alt="Logo" class="img-circle" width="40px" height="40px">{!! config('backpack.base.logo_lg') !!}</span>
                     </a>
                     <!-- Header Navbar: style can be found in header.less -->
                     <nav class="navbar navbar-static-top" role="navigation" >
@@ -108,7 +108,7 @@
 <!-- =============================================== -->
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="background-image:url('{{url('/storage/backgroundblue.png')}}'); filter: brightness(98%);">
+    <div class="content-wrapper" style="background-image:url('{{ asset('images/backgroundblue.png')}}'); filter: brightness(98%);">
         <!-- Content Header (Page header) -->
     @yield('header')
 

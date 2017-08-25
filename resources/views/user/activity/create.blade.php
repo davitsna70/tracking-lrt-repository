@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             @endif
-            <form role="form" action="/activity/save/" method="post" enctype="multipart/form-data">
+            <form role="form" action="{{url("/activity/save/")}}" method="post" enctype="multipart/form-data">
 
             {{csrf_field()}}
             <!-- text input -->

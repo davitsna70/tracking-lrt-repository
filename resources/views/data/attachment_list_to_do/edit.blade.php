@@ -22,7 +22,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-            <form role="form" action="/data/attachment_list_to_do/{{$attachment_list_to_do->id}}/update" method="post" enctype="multipart/form-data">
+            <form role="form" action="{{url("/data/attachment_list_to_do/".$attachment_list_to_do->id."/update"}}" method="post" enctype="multipart/form-data">
                 {{csrf_field()}}
 
                 <div class="form-group">

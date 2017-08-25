@@ -16,7 +16,8 @@ class PublicController extends Controller
     public function index(){
         $act = Activity::where('hak_akses', '=', 'public')
             ->orderBy('tanggal_mulai');
-        if($act != null) {
+//        dd($act);
+        if($act->first() != null) {
             $date = $act->first()->tanggal_mulai;
             $dateFirst = $act->first()->tanggal_mulai;
             $act = Activity::where('hak_akses', '=', 'public')
@@ -68,7 +69,7 @@ class PublicController extends Controller
             ->orWhere('hak_akses', '=', 'public')
             ->whereYear('tanggal_berakhir', '=', $request->tahun)
             ->orderBy('tanggal_mulai');
-        if($act!=null){
+        if($act->first()!=null){
             $date = $act->first()->tanggal_mulai;
             $act = Activity::where('hak_akses', '=', 'public')
                 ->orderBy('tanggal_mulai');
