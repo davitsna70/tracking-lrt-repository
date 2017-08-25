@@ -133,6 +133,18 @@
                     </div>
                 </div>
 
+                <!-- RELATION ACTIVITY-->
+                <div class="form-group">
+                    <label>Aktivitas ini tergantung pada aktivitas</label>
+                    <select class="form-control" name="activity_relation">
+                        <option value="" disabled="">--- Relation Activity ---</option>
+                        <option value="">Tidak Ada</option>
+                        @foreach(\App\Activity::where('user_id','=', Auth::user()->id)->get() as $activity)
+                            <option value="{{$activity->id}}">{{$activity->judul}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="member">Members :</label> <button class="btn btn-danger btn-xs inline" type="button" id="clear-member"> Clear Member</button>
                     <ul id="member-list">
@@ -184,7 +196,7 @@
             ),
             $( function() {
                 $( "#add-member-input" ).autocomplete({
-                    source: 'http://localhost:8000/activity/search_by_name',
+                    source: '{{url("/activity/search_by_name")}}',
                     appendTo : $('#createActivity')
                 });
             } ),

@@ -74,7 +74,7 @@
     {{--<div style="background-color: #9d9d9d">--}}
         {{--<img src="{{ asset('images/LRT.png') }}" alt="" class="img-circle" width="70" height="70">--}}
     {{--</div>--}}
-    <header class="main-header" >
+    <header class="main-header" style="background-color: mediumpurple;">
         <!-- Logo -->
         @if(Auth::check())
             <a href="{{ url('/timeline') }}" class="logo" >

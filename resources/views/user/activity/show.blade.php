@@ -28,7 +28,7 @@
                     </ul>
                 </div>
             @endif
-            <div class="box box-primary">
+            <div class="box box-primary" >
                 <div class="box-header with-border">
                     <h3 class="box-title">Judul : {{$activity->judul}}</h3>
                 </div>
@@ -71,6 +71,10 @@
                                             <td> {{$activity->waktu_selesai}}</td>
                                         </tr>
                                         <tr>
+                                            <td>Tergantung pada Aktivitas  </td>
+                                            <td> {{($activity->activity_relation->tergantung!=null)?\App\Activity::find($activity->activity_relation->tergantung)->judul:''}}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Deskripsi </td>
                                             <td> <?= ucfirst(nl2br( $activity->deskripsi))?></td>
                                         </tr>
@@ -97,7 +101,7 @@
                             <strong><p>Checklist : </p></strong>
                             <ul>
                                 @foreach($activity->list_to_dos as $list_to_do)
-                                    <li>{{ucwords($list_to_do->judul)}}<br>
+                                    <li {{($activity->activity_relation->tergantung!=null)?((\App\Activity::find($activity->activity_relation->tergantung)->status!='done')?'disabled':''):''}}>{{ucwords($list_to_do->judul)}}<br>
                                         @if($list_to_do->deskripsi!=null)
                                             <p>Deskripsi : <?= ucfirst(nl2br($list_to_do->deskripsi))?></p>
                                         @endif
@@ -109,10 +113,10 @@
                                         @endif
                                         @if($activity->user->id == Auth::user()->id || count(\App\UserActivity::where('activity_id', '=',$activity->id)->where('user_id', '=', Auth::user()->id)->get())>0)
                                             @if($list_to_do->status=='undone')
-                                                <a href="{{url('/activity/list_to_do/done/'.$list_to_do->id)}}" class="btn btn-success btn-xs">Done</a>
+                                                <a href="{{url('/activity/list_to_do/done/'.$list_to_do->id)}}" class="btn btn-success btn-xs" {{($activity->activity_relation->tergantung!=null)?((\App\Activity::find($activity->activity_relation->tergantung)->status!='done')?'disabled':''):''}}>Done</a>
                                                 @if($list_to_do->user!=null)<p class="inline">Undone by: {{$list_to_do->user->name}}</p>@endif
                                             @else
-                                                <a href="{{url('/activity/list_to_do/undone/'.$list_to_do->id)}}" class="btn btn-warning btn-xs">Undone</a>
+                                                <a href="{{url('/activity/list_to_do/undone/'.$list_to_do->id)}}" class="btn btn-warning btn-xs" {{($activity->activity_relation->tergantung!=null)?((\App\Activity::find($activity->activity_relation->tergantung)->status!='done')?'disabled':''):''}}>Undone</a>
                                                 @if($list_to_do->user!=null)<p class="inline">Done by: {{$list_to_do->user->name}}</p>@endif
                                             @endif
                                         @endif

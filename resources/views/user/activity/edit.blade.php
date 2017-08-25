@@ -31,7 +31,7 @@
                     </ul>
                 </div>
             @endif
-            <form role="form" action="{{url("/activity".$activity->id."/save_change")}}" method="post" enctype="multipart/form-data">
+            <form role="form" action="{{url("/activity/".$activity->id."/save_change")}}" method="post" enctype="multipart/form-data">
 
             {{csrf_field()}}
             <!-- text input -->
@@ -172,6 +172,19 @@
                         <button type="button" id="member-button" class="btn btn-primary btn-xs" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Add Member</button>
                     </div>
                 </div>
+
+                <!-- RELATION ACTIVITY-->
+                <div class="form-group">
+                    <label>Aktivitas ini tergantung pada aktivitas</label>
+                    <select class="form-control" name="activity_relation">
+                        <option value="" disabled="">--- Relation Activity ---</option>
+                        <option value="">Tidak Ada</option>
+                        @foreach(\App\Activity::where('user_id','=', Auth::user()->id)->get() as $act)
+                            <option value="{{$act->id}}" {{($act->activity_relation->tergantung!=null)?(($act->id == $activity->activity_relation->tergantung)?'selected':''):''}}>{{$act->judul}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <input type="hidden" name="_method" value="PUT">
                 <button type="submit" class="btn btn-primary pull-right" name="create" value="create" id="btn-create-activity" {{($activity->user_id == Auth::user()->id)?'':'disabled'}}>Update Activity</button>
             </form>
@@ -209,7 +222,7 @@
             ),
             $( function() {
                 $( "#add-member-input" ).autocomplete({
-                    source: 'http://localhost:8000/activity/search_by_name',
+                    source: '{{url("/activity/search_by_name")}}',
                     appendTo : $('#createActivity')
                 });
             } ),

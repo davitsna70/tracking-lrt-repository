@@ -19,6 +19,7 @@ use App\Notifications\UndoneChecklist;
 use App\Notifications\UpdateActivity;
 use App\User;
 use App\UserActivity;
+use App\ActivityRelation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;use App\LogActivity;
@@ -130,6 +131,12 @@ class MenuActivityController extends Controller
             ->where('user_id', '=', Auth::user()->id)
             ->where('judul', '=', $activity->judul)
             ->first();
+
+//        activity relation
+        $activityRelation = new ActivityRelation();
+        $activityRelation->activity_id = $activity->id;
+        $activityRelation->tergantung = ($request->activity_relation=="")?null:$request->activity_relation;
+        $activityRelation->save();
 
         if($request->hasFile('attachment_activity')){
             $attachmentActivity = new AttachmentActivity();
@@ -297,6 +304,10 @@ class MenuActivityController extends Controller
             ->where('user_id', '=', Auth::user()->id)
             ->where('judul', '=', $activity->judul)
             ->first();
+
+        $activityRelation = ActivityRelation::where('activity_id', '=', $activity->id)->first();
+        $activityRelation->tergantung = ($request->activity_relation=="")?null:$request->activity_relation;
+        $activityRelation->save();
 
         if($request->hasFile('attachment_activity')){
             $attachmentActivity = new AttachmentActivity();

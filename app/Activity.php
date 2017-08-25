@@ -47,6 +47,14 @@ class Activity extends Model
         return $this->hasMany('App\ListToDo');
     }
 
+    public function tergantung(){
+        return $this->hasOne('App\ActivityRelation', 'tergantung');
+    }
+
+    public function activity_relation(){
+        return $this->hasOne('App\ActivityRelation');
+    }
+
     public function delete()
     {
         foreach ($this->attachment_activities as $attachment_activity)$attachment_activity->delete();
