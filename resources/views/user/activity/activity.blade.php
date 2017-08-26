@@ -75,9 +75,9 @@
                                     @if($activity->status === "plan")
                                         <h3><b>Activity : {{$activity->judul}}</b></h3>
                                     @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
-                                            <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
+                                            <a href="{{url('/archive/delete/'.$activity->id)}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
-                                            <a href="/archive/add/{{$activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
+                                            <a href="{{url('/archive/add/'.$activity->id)}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
                                         @endif
                                         <div class="post row">
                                             <div class="col-sm-5">
@@ -126,9 +126,9 @@
                                     @if($activity->status === "ongoing")
                                         <h3><b>Activity : {{$activity->judul}}</b></h3>
                                         @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
-                                            <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
+                                            <a href="{{url('/archive/delete/'.$activity->id)}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
-                                            <a href="/archive/add/{{$activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
+                                            <a href="{{url('/archive/add/'.$activity->id)}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
                                         @endif
                                         <div class="post row">
                                             <div class="col-sm-5">
@@ -176,9 +176,9 @@
                                     @if($activity->status === "late")
                                         <h3><b>Activity : {{$activity->judul}}</b></h3>
                                         @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
-                                            <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
+                                            <a href="{{url('/archive/delete/'.$activity->id)}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
-                                            <a href="/archive/add/{{$activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
+                                            <a href="{{url('/archive/add/'.$activity->id)}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
                                         @endif
                                         <div class="post row">
                                             <div class="col-sm-5">
@@ -277,9 +277,9 @@
                                     @if($activity->status === "done")
                                         <h3><b>Activity : {{$activity->judul}}</b></h3>
                                         @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $activity->id)->get())>0)
-                                            <a href="/archive/delete/{{$activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
+                                            <a href="{{url('/archive/delete/'.$activity->id)}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                         @else
-                                            <a href="/archive/add/{{$activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
+                                            <a href="{{url('/archive/add/'.$activity->id)}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
                                         @endif
                                         <div class="post row">
                                             <div class="col-sm-5">

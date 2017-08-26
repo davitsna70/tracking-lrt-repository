@@ -30,9 +30,9 @@
                                         @forelse($archives as $archive)
                                                 <h3><b>Activities : {{$archive->activity->judul}}</b></h3>
                                                 @if(count(\App\Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $archive->activity->id)->get())>0)
-                                                    <a href="/archive/delete/{{$archive->activity->id}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
+                                                    <a href="{{url('/archive/delete/'.$archive->activity->id)}}" class="btn btn-danger btn-sm pull-right">Delete from Archive</a>
                                                 @else
-                                                    <a href="/archive/add/{{$archive->activity->id}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
+                                                    <a href="{{url('/archive/add/'.$archive->activity->id)}}" class="btn btn-primary btn-sm pull-right">Add to Archive</a>
                                                 @endif
                                                 <div class="post row">
                                                     <div class="col-sm-5">

@@ -35,7 +35,7 @@ class MenuArchiveController extends Controller
     }
 
     public function deleteFromArchive($id){
-        $archive = Archive::find($id);
+        $archive = Archive::where('user_id', '=', Auth::user()->id)->where('activity_id', '=', $id)->first();
         $archive->delete();
 
         (new LogActivity())->saveLog('telah menghapus archive '.$id);

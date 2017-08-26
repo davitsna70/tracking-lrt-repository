@@ -72,7 +72,7 @@
                                         </tr>
                                         <tr>
                                             <td>Tergantung pada Aktivitas  </td>
-                                            <td> {{($activity->activity_relation->tergantung!=null)?\App\Activity::find($activity->activity_relation->tergantung)->judul:''}}</td>
+                                            <td><a href="{{url('/activity/'.(($activity->activity_relation->tergantung!=null)?$activity->activity_relation->tergantung:'').'/show')}}">{{($activity->activity_relation->tergantung!=null)?\App\Activity::find($activity->activity_relation->tergantung)->judul:''}}</a></td>
                                         </tr>
                                         <tr>
                                             <td>Deskripsi </td>

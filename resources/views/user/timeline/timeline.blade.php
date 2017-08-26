@@ -161,7 +161,7 @@
                                                                         @if($activity->status == 'plan')
                                                                             <td style="background-color: bisque;"></td>
                                                                         @elseif($activity->status =='ongoing')
-                                                                            @if($it == date('m') && $i<=weekOn(date('Y-m-d')))
+                                                                            @if($it == date('m') && $i<=weekOn(date('Y-m-d')) || $it<date('m'))
                                                                                 <td style="background-color: aqua;"></td>
                                                                             @else
                                                                                 <td style="background-color: bisque;"></td>
