@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tanggal_lahir">Tanggal Lahir</label>
-                                    <input type="text" class="form-control" id="datepicker" name="tanggal_lahir" placeholder="Enter" value="{{$user->profile->tanggal_lahir}}">
+                                    <input type="text" class="form-control" id="datepicker" name="tanggal_lahir" placeholder="Enter" value="{{date('m/d/Y',strtotime($user->profile->tanggal_lahir))}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat_tinggal">Alamat Tinggal</label>

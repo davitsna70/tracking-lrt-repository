@@ -50,7 +50,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" id="datepicker-1" name="tanggal_lahir" value="{{$profile->tanggal_lahir}}">
+                        <input type="text" class="form-control pull-right" id="datepicker-1" name="tanggal_lahir" value="{{date('m/d/Y', strtotime($profile->tanggal_lahir))}}">
                     </div>
                     <!-- /.input group -->
                 </div>

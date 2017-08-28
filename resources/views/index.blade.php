@@ -325,15 +325,15 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
                                                             <li style="font-size: 12px">{{$userAct->user->name}}</li>
                                                         @endforeach
                                                     </td>
-                                                    <?php $sumDateAll = 0;?>
+                                                    <?php $sumDateAll = strtotime($activity->tanggal_berakhir)-strtotime($activity->tanggal_mulai);?>
                                                     @for($it=$month;$it<=12;$it++)
                                                         @for($i=1;$i<=limitWeekInMonth(date('Y-m-d', strtotime($year.'-'.$it.'-01'))); $i++)
                                                             @if( isInRangeDate(date('Y-m-d', strtotime($year.'-'.$it.'-'.((($i-1)*7)+1))), $activity->tanggal_mulai, $activity->tanggal_berakhir))
-                                                                <?php $sumDateAll++; ?>
+
                                                                 @if($activity->status == 'plan')
                                                                     <td style="background-color: bisque;"></td>
                                                                 @elseif($activity->status =='ongoing')
-                                                                    @if($it == date('m') && $i<=weekOn(date('Y-m-d')) || $it < date('m'))
+                                                                    @if(($it == date('m') && ($i<=weekOn(date('Y-m-d')) && $year <= date('Y'))) || ($it < date('m')&& $year <= date('Y')))
                                                                         <td style="background-color: aqua;"></td>
                                                                     @else
                                                                         <td style="background-color: bisque;"></td>
@@ -375,15 +375,7 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
                                                                         @elseif(strtotime(date('Y-m-d'))<=strtotime($activity->tanggal_mulai))
                                                                             <?php $sumDateToday=0;?>
                                                                         @else
-                                                                            @for($it=$month;$it<=12;$it++)
-                                                                                @for($i=1;$i<=limitWeekInMonth(date('Y-m-d', strtotime($year.'-'.$it.'-01'))); $i++)
-                                                                                    @if( isInRangeDate(date('Y-m-d', strtotime($year.'-'.$it.'-'.((($i-1)*7)+1))), $activity->tanggal_mulai, $activity->tanggal_berakhir))
-                                                                                        @if(strtotime($year.'-'.$it.'-'.((($i-1)*7)+1))<=strtotime(date('Y-m-d')))
-                                                                                            <?php $sumDateToday++; ?>
-                                                                                        @endif
-                                                                                    @endif
-                                                                                @endfor
-                                                                            @endfor
+                                                                            <?php $sumDateToday = strtotime(date('Y-m-d'))-strtotime($activity->tanggal_mulai);?>
                                                                         @endif
                                                 </tr>
                                                 <tr>
@@ -584,7 +576,7 @@ function getNumWeekBetweenMonth($monthStart, $monthEnd, $year){
     
     $('#login').on('click',
         function () {
-            window.location.href = "{{url('/login')}}";
+            window.location.href = "{{url('/dashboard')}}";
         }
     );
 

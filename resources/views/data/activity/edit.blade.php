@@ -63,7 +63,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" id="datepicker-1" name="tanggal_mulai" value="{{$activity->tanggal_mulai}}">
+                        <input type="text" class="form-control pull-right" id="datepicker-1" name="tanggal_mulai" value="{{date('m/d/Y', strtotime($activity->tanggal_mulai))}}">
                     </div>
 
                     <label>Tanggal Berakhir:</label>
@@ -71,7 +71,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" id="datepicker-2" name="tanggal_berakhir" value="{{$activity->tanggal_berakhir}}">
+                        <input type="text" class="form-control pull-right" id="datepicker-2" name="tanggal_berakhir" value="{{date('m/d/Y', strtotime($activity->tanggal_berakhir))}}">
                     </div>
                     <!-- /.input group -->
                 </div>

@@ -81,7 +81,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" class="form-control pull-right " {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} id="datepicker-1" name="tanggal_mulai" placeholder="Tanggal Mulai" value="{{$activity->tanggal_mulai}}">
+                                <input type="text" class="form-control pull-right " {{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} id="datepicker-1" name="tanggal_mulai" placeholder="Tanggal Mulai" value="{{date('m/d/Y', strtotime($activity->tanggal_mulai))}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -90,7 +90,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" class="form-control pull-right "{{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} id="datepicker-2" name="tanggal_berakhir" placeholder="Tanggal Berakhir" value="{{$activity->tanggal_berakhir}}">
+                                <input type="text" class="form-control pull-right "{{($activity->user_id == \Illuminate\Support\Facades\Auth::user()->id)?'':'disabled'}} id="datepicker-2" name="tanggal_berakhir" placeholder="Tanggal Berakhir" value="{{date('m/d/Y', strtotime($activity->tanggal_berakhir))}}">
                             </div>
                         </div>
                     </div>

@@ -254,23 +254,6 @@
                     $('#member-list').html("");
                     $('#member-hide-input').html("");
                 }
-            ),
-            $('#datepicker-2').on('focus',
-                function () {
-                    var date1 = $('#datepicker-1').val();
-                    if(date1 == ""){
-                        $('#datepicker-1').val($.datepicker.formatDate('mm/dd/yy', new Date()));
-                    }
-                }
-            ),
-            $('#datepicker-2').on('change',
-                function () {
-                    if(this.val()!="") {
-                        if (new Date($('#datepicker-1').val()).getTime() > new Date(this.val()).getTime()) {
-                            this.val('');
-                        }
-                    }
-                }
             )
         );
 

@@ -71,7 +71,7 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>
+              {{--<li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>--}}
               <li><a href="{{url('/help/information')}}"><i class="fa fa-question-circle"></i> Information</a></li>
               <li><a href="{{url('/help/about')}}"><i class="fa fa-question-circle"></i> About</a></li>
               <li><a href="{{url('/help/contact')}}"><i class="fa fa-question-circle"></i> Contact</a></li>
@@ -98,7 +98,7 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>
+{{--              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>--}}
               <li><a href="{{url('/help/information')}}"><i class="fa fa-question-circle"></i> Information</a></li>
               <li><a href="{{url('/help/about')}}"><i class="fa fa-question-circle"></i> About</a></li>
               <li><a href="{{url('/help/contact')}}"><i class="fa fa-question-circle"></i> Contact</a></li>
@@ -123,7 +123,7 @@
             </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>
+              {{--<li><a href="{{url('/help/how_to_use')}}"><i class="fa fa-question-circle"></i> How To Use</a></li>--}}
               <li><a href="{{url('/help/information')}}"><i class="fa fa-question-circle"></i> Information</a></li>
               <li><a href="{{url('/help/about')}}"><i class="fa fa-question-circle"></i> About</a></li>
               <li><a href="{{url('/help/contact')}}"><i class="fa fa-question-circle"></i> Contact</a></li>
